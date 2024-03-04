@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXML.java to edit this template
+ * Seth Lukas Castillo
+ * Tau
  */
 package hundreddays;
 
@@ -15,16 +15,20 @@ import javafx.stage.Stage;
  * @author TAU
  */
 public class HundredDays extends Application {
+    private static Stage stage;
     
     @Override
     public void start(Stage stage) throws Exception {
         //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
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        HundredDays.stage = stage;
         
+        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+        stage.setTitle("Hundred Days");
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
         stage.show();
+        System.out.println("Help!!");
     }
 
     /**
@@ -32,6 +36,10 @@ public class HundredDays extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+    public static Stage getStage(){
+        return stage;
     }
     
 }
