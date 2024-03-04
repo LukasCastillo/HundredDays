@@ -19,7 +19,6 @@ public class HundredDays extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        //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
         HundredDays.stage = stage;
         
         Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
