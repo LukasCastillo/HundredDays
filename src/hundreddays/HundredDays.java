@@ -20,6 +20,7 @@ public class HundredDays extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        //navigation buttons work
         HundredDays.stage = stage;
         
         Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
