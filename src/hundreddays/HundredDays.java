@@ -41,4 +41,10 @@ public class HundredDays extends Application {
     public static Stage getStage(){
         return stage;
     }
+    
+    public static void setStage(String path) throws IOException{
+        System.out.println("Opened " + path + " screen");
+        FXMLLoader loader = new FXMLLoader(HundredDays.class.getResource(path));
+        stage.setScene(new Scene(loader.load()));
+    }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hundreddays.ControlsScreenController">
    <center>
       <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="252.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -27,7 +27,7 @@
             <Label text="Backward" GridPane.rowIndex="1" />
             <Label text="Forward" />
             <Label text="Right" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="709.0" text="Back" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onAction="#backScreen" prefHeight="25.0" prefWidth="709.0" text="Back" GridPane.columnSpan="2" GridPane.rowIndex="4" />
             <TextField GridPane.columnIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />

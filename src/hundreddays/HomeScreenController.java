@@ -29,11 +29,18 @@ public class HomeScreenController implements Initializable {
     @FXML Button exitButton;
     
     @FXML private void openGame(ActionEvent ae){
-        System.out.println("Open game screen");
-        System.out.println(ae);
-        
         try {
-            HundredDays.getStage().setScene(new Scene(FXMLLoader.load(HomeScreenController.class.getResource("GameScreen.fxml"))));
+            HundredDays.setStage("GameScreen.fxml");
+        } catch (IOException ex) {
+            System.out.println("Failed to load stage GameScreen.fxml");
+            System.out.println(ex.getMessage());
+            System.exit(1);
+        }
+    }
+    
+    @FXML private void openSettings(){
+        try {
+            HundredDays.setStage("SettingsScreen.fxml");
         } catch (IOException ex) {
             System.out.println("Failed to load stage GameScreen.fxml");
             System.out.println(ex.getMessage());
