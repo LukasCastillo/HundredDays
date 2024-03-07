@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
    <center>
-      <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" BorderPane.alignment="CENTER">
+      <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="252.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="458.0" minWidth="10.0" prefWidth="301.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="299.0" />
@@ -23,11 +23,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Label" GridPane.rowIndex="2" />
-            <Label text="Label" GridPane.rowIndex="1" />
-            <Label text="Label" />
-            <Label text="Label" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="709.0" text="Button" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Label text="Left" GridPane.rowIndex="2" />
+            <Label text="Backward" GridPane.rowIndex="1" />
+            <Label text="Forward" />
+            <Label text="Right" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="709.0" text="Back" GridPane.columnSpan="2" GridPane.rowIndex="4" />
             <TextField GridPane.columnIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />

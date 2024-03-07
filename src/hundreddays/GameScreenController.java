@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -18,11 +19,10 @@ import javafx.scene.control.Button;
  */
 public class GameScreenController implements Initializable {
     
-    @FXML Button settingsButton;
+    @FXML ImageView settingsButton;
 
-    @FXML private void openSettings(ActionEvent ae){
+    @FXML private void openSettings(){
         System.out.println("Open Settings!!");
-        System.out.println(ae);
         
     }
     
