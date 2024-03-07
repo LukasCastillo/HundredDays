@@ -4,6 +4,7 @@
  */
 package hundreddays;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -40,5 +41,4 @@ public class HundredDays extends Application {
     public static Stage getStage(){
         return stage;
     }
-    
 }
