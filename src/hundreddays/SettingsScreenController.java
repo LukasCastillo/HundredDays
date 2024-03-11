@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.KeyCombination;
 
 /**
  * FXML Controller class
@@ -43,6 +44,12 @@ public class SettingsScreenController implements Initializable {
             System.out.println(ex.getMessage());
             System.exit(1);
         }
+    }
+    
+    @FXML private void setFullScreen(){
+        HundredDays.getStage().setFullScreenExitHint("");
+        HundredDays.getStage().setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        HundredDays.getStage().setFullScreen(!HundredDays.getStage().isFullScreen());
     }
     
     /**

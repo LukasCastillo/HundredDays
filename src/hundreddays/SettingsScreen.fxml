@@ -24,7 +24,7 @@
             </HBox>
             <HBox alignment="CENTER" prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
                <children>
-                  <Button mnemonicParsing="false" prefWidth="100.0" text="Fullscreen" />
+                  <Button mnemonicParsing="false" onAction="#setFullScreen" prefWidth="100.0" text="Fullscreen" />
                   <Button mnemonicParsing="false" onAction="#openControls" prefWidth="100.0" text="Controls" />
                </children>
             </HBox>
