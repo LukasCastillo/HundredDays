@@ -2,8 +2,9 @@
  *  Seth Lukas Castillo
  *  Tau
  */
-package hundreddays;
+package hundreddays.controller;
 
+import hundreddays.HundredDays;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,7 +21,7 @@ public class ControlsScreenController implements Initializable {
     
     @FXML private void backScreen(){
          try {
-            HundredDays.setStage("SettingsScreen.fxml");
+            HundredDays.setStage("render/screens/SettingsScreen.fxml");
         } catch (IOException ex) {
             System.out.println("Failed to load stage SettingsScreen.fxml");
             System.out.println(ex.getMessage());

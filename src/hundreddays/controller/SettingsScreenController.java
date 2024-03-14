@@ -2,8 +2,9 @@
  * Seth Lukas Castillo
  * Tau
  */
-package hundreddays;
+package hundreddays.controller;
 
+import hundreddays.HundredDays;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +29,7 @@ public class SettingsScreenController implements Initializable {
     
     @FXML private void backScreen(){
         try {
-            HundredDays.setStage("HomeScreen.fxml");
+            HundredDays.setStage("render/screens/HomeScreen.fxml");
         } catch (IOException ex) {
             System.out.println("Failed to load stage HomeScreen.fxml");
             System.out.println(ex.getMessage());
@@ -38,7 +39,7 @@ public class SettingsScreenController implements Initializable {
     
     @FXML private void openControls(){
         try {
-            HundredDays.setStage("ControlsScreen.fxml");
+            HundredDays.setStage("render/screens/ControlsScreen.fxml");
         } catch (IOException ex) {
             System.out.println("Failed to load stage ControlsScreen.fxml");
             System.out.println(ex.getMessage());

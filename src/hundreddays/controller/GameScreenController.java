@@ -2,7 +2,7 @@
  * Seth Lukas Castillo
  * Tau
  */
-package hundreddays;
+package hundreddays.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;

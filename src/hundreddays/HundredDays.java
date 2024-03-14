@@ -23,7 +23,7 @@ public class HundredDays extends Application {
         //navigation buttons work
         HundredDays.stage = stage;
         
-        Parent root = FXMLLoader.load(getClass().getResource("HomeScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("render/screens/HomeScreen.fxml"));
         stage.setTitle("Hundred Days");
         Scene scene = new Scene(root);
         
