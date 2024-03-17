@@ -2,13 +2,15 @@
  * Seth Lukas Castillo
  * Tau
  */
-package hundreddays.controller;
+package hundreddays.controllers;
 
 import hundreddays.HundredDays;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,6 +23,7 @@ import javafx.scene.input.KeyCombination;
  * @author TAU
  */
 public class SettingsScreenController implements Initializable {
+    private static String previousScreen = "HomeScreen.fxml";
 
     @FXML
     private Slider soundSlider;
@@ -29,9 +32,9 @@ public class SettingsScreenController implements Initializable {
     
     @FXML private void backScreen(){
         try {
-            HundredDays.setStage("render/screens/HomeScreen.fxml");
+            HundredDays.setStage("render/screens/" + previousScreen);
         } catch (IOException ex) {
-            System.out.println("Failed to load stage HomeScreen.fxml");
+            System.out.println("Failed to load stage " + previousScreen);
             System.out.println(ex.getMessage());
             System.exit(1);
         }
@@ -55,12 +58,20 @@ public class SettingsScreenController implements Initializable {
     
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        soundLabel.textProperty().bind(
-                Bindings.format("%.1f%%", soundSlider.valueProperty())
-        );
+        soundSlider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldLevel, Number newLevel) -> {
+            soundLabel.setText(String.format("%.1f%%", newLevel.doubleValue()));
+        });
     }    
-    
+
+    /**
+     * @param aPreviousScreen the previousScreen to set
+     */
+    public static void setPreviousScreen(String aPreviousScreen) {
+        previousScreen = aPreviousScreen;
+    }
 }
