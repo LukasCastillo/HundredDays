@@ -4,6 +4,7 @@
  */
 package hundreddays;
 
+import hundreddays.game.Game;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
  */
 public class HundredDays extends Application {
     private static Stage stage;
+    private static Game game;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -30,6 +32,8 @@ public class HundredDays extends Application {
         stage.setScene(scene);
         stage.show();
         System.out.println("Help!!");
+        
+        game = new Game();
     }
 
     /**
@@ -41,6 +45,10 @@ public class HundredDays extends Application {
     
     public static Stage getStage(){
         return stage;
+    }
+    
+    public static Game getGame(){
+        return game;
     }
     
     /**

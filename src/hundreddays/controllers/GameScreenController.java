@@ -5,10 +5,13 @@
 package hundreddays.controllers;
 
 import hundreddays.HundredDays;
+import hundreddays.handlers.MapHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -16,6 +19,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -25,6 +30,10 @@ import javafx.scene.image.ImageView;
 public class GameScreenController implements Initializable {
     
     @FXML ImageView settingsButton;
+    @FXML ImageView bgImage;
+    
+    
+    private MapHandler mapHandler = new MapHandler();
 
     @FXML private void openSettings(){
         System.out.println("Open Settings!!");
@@ -66,12 +75,30 @@ public class GameScreenController implements Initializable {
         }
     }
     
+    @FXML private void onKeyPressed(KeyEvent key){
+        System.out.println(key);
+        if(key.getCode() == KeyCode.W){
+            HundredDays.getGame().player.moveBy(0, 0.5);
+            mapHandler.renderMap(bgImage);
+        }
+    }
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        HundredDays.getStage().addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>(){
+            @Override
+            public void handle(KeyEvent key) {
+                System.out.println(key);
+                if(key.getCode() == KeyCode.W){
+                    HundredDays.getGame().player.moveBy(0, 0.5);
+                    mapHandler.renderMap(bgImage);
+                }
+            }
+        
+        });
     }    
     
 }
