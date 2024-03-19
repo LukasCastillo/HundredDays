@@ -57,7 +57,7 @@ public class GameScreenController implements Initializable {
         else if(alert.getResult() == settingsButton){
             try {
                 SettingsScreenController.setPreviousScreen("GameScreen");
-                HundredDays.setStage("SettingsScreen");
+                HundredDays.setScreen("SettingsScreen");
             } catch (IOException ex) {
                 System.out.println("Failed to load stage SettingsScreen.fxml");
                 System.out.println(ex.getMessage());
@@ -66,7 +66,7 @@ public class GameScreenController implements Initializable {
         }
         else if(alert.getResult() == exitButton){
             try {
-                HundredDays.setStage("HomeScreen");
+                HundredDays.setScreen("HomeScreen");
             } catch (IOException ex) {
                 System.out.println("Failed to load stage HomeScreen.fxml");
                 System.out.println(ex.getMessage());

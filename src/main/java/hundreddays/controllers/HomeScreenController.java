@@ -29,7 +29,7 @@ public class HomeScreenController implements Initializable {
     
     @FXML private void openGame(ActionEvent ae){
         try {
-            HundredDays.setStage("GameScreen");
+            HundredDays.setScreen("GameScreen");
         } catch (IOException ex) {
             System.out.println("Failed to load stage GameScreen.fxml");
             System.out.println(ex.getMessage());
@@ -40,7 +40,7 @@ public class HomeScreenController implements Initializable {
     @FXML private void openSettings(){
         try {
             SettingsScreenController.setPreviousScreen("HomeScreen");
-            HundredDays.setStage("SettingsScreen");
+            HundredDays.setScreen("SettingsScreen");
         } catch (IOException ex) {
             System.out.println("Failed to load stage GameScreen.fxml");
             System.out.println(ex.getMessage());

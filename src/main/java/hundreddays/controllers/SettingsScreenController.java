@@ -35,7 +35,7 @@ public class SettingsScreenController implements Initializable {
     
     @FXML private void backScreen(){
         try {
-            HundredDays.setStage(previousScreen);
+            HundredDays.setScreen(previousScreen);
         } catch (IOException ex) {
             System.out.println("Failed to load stage " + previousScreen);
             System.out.println(ex.getMessage());
@@ -45,7 +45,7 @@ public class SettingsScreenController implements Initializable {
     
     @FXML private void openControls(){
         try {
-            HundredDays.setStage("ControlsScreen");
+            HundredDays.setScreen("ControlsScreen");
         } catch (IOException ex) {
             System.out.println("Failed to load stage ControlsScreen.fxml");
             System.out.println(ex.getMessage());
@@ -60,11 +60,11 @@ public class SettingsScreenController implements Initializable {
         if(HundredDays.getOptions().isFullScreen()){
             HundredDays.getStage().setFullScreen(false);
             HundredDays.getOptions().setFullScreen(false);
-            fullScreenButton.setText("Windowed");
+            fullScreenButton.setText("Fullscreen");
         }else{
             HundredDays.getStage().setFullScreen(true);
             HundredDays.getOptions().setFullScreen(true);
-            fullScreenButton.setText("Fullscreen");
+            fullScreenButton.setText("Windowed");
         }
     }
     

@@ -9,16 +9,12 @@ import hundreddays.enums.KeyAction;
 import hundreddays.exceptions.KeybindAlreadyExisitsException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
 
@@ -44,7 +40,7 @@ public class ControlsScreenController implements Initializable {
     
     @FXML private void backScreen(){
          try {
-             HundredDays.setStage("SettingsScreen");
+             HundredDays.setScreen("SettingsScreen");
          } catch (IOException ex) {
             System.out.println("Failed to load stage SettingsScreen.fxml");
             System.out.println(ex.getMessage());
