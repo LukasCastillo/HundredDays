@@ -1,10 +1,14 @@
 package hundreddays;
 
+import com.google.gson.Gson;
 import hundreddays.game.Game;
 import hundreddays.game.Options;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -32,6 +36,14 @@ public class HundredDays extends Application {
         
         game = new Game();
         options = new Options();
+        
+        //load options
+        String optionsString = readFileContents(new File("Hundred_Days/options.json"));
+        if(optionsString != null){
+            System.out.println(optionsString);
+            Gson gson = new Gson();
+            options = gson.fromJson(optionsString, Options.class);
+        }
     }
 
     
@@ -59,9 +71,46 @@ public class HundredDays extends Application {
         stage.getScene().setRoot(loader.load());
         return loader.getController();
     }
+    
+    public static void saveOptions(){
+        Gson gson = new Gson();
+        String serilizedOptions = gson.toJson(options);
+        
+        try {
+            File optionsFile = new File("Hundred_Days/options.json");
+            optionsFile.getParentFile().mkdirs();
+            optionsFile.createNewFile();
+            FileWriter fw = new FileWriter(optionsFile);
+            fw.write(serilizedOptions);
+            fw.close();
+            
+            System.out.println("Saved options to:");
+            System.out.println(optionsFile.getAbsolutePath());
+        } catch (IOException ex) {
+            System.out.println("Not able to save options file!");
+            System.out.println(ex);
+        }
+        
+    }
 
     public static void main(String[] args) {
         launch();
+    }
+    
+    
+    private static String readFileContents(File file){
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            System.out.println("Uable to read file: " + file.getAbsolutePath());
+        }
+        
+        return null;
     }
 
 }

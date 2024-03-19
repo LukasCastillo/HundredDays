@@ -5,11 +5,6 @@ package hundreddays.game;
 
 import hundreddays.enums.KeyAction;
 import hundreddays.exceptions.KeybindAlreadyExisitsException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 import javafx.scene.input.KeyCode;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
