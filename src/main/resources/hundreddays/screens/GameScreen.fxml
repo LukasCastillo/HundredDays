@@ -13,13 +13,17 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hundreddays.controllers.GameScreenController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hundreddays.controllers.GameScreenController">
    <children>
-      <ImageView fx:id="bgImage" fitHeight="400.0" fitWidth="526.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" scaleZ="2.0">
-         <image>
-            <Image url="@../bg/map.png" />
-         </image>
-      </ImageView>
+      <Pane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="bgImage" fitHeight="556.0" fitWidth="687.0" pickOnBounds="true" preserveRatio="true" x="300.0" y="200.0">
+               <image>
+                  <Image url="@../bg/map.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@GameStyle.css">
          <top>
             <BorderPane BorderPane.alignment="CENTER">
@@ -87,6 +91,7 @@
                         <Image url="@../ui/player.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="fpsLabel" layoutX="473.0" layoutY="5.0" prefHeight="17.0" prefWidth="89.0" text="FPS: " />
                </children>
             </AnchorPane>
          </center>

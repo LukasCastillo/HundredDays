@@ -70,6 +70,6 @@ public class Options {
     }
     
     public KeyAction getAssociatedKeyAction(KeyCode c){
-       return this.keyBinds.getKey(c);
+        return this.keyBinds.getKey(c);
     }
 }

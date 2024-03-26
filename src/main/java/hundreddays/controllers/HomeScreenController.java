@@ -50,7 +50,6 @@ public class HomeScreenController implements Initializable {
     
     @FXML private void exitGame(ActionEvent ae){
         System.out.println("Exiting");
-        HundredDays.saveOptions();
         HundredDays.getStage().close();
     }
     

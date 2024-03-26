@@ -14,9 +14,12 @@ import javafx.scene.image.ImageView;
 public class MapHandler {
     
     public void renderMap(ImageView bgImage){
-        System.out.println(HundredDays.getGame().player.getYPos());
-        bgImage.translateYProperty().set(HundredDays.getGame().player.getYPos()*10);
-        bgImage.translateXProperty().set(HundredDays.getGame().player.getXPos()*10);
+        System.out.println(HundredDays.getGame().getPlayerHandler().getPlayer().getYPos());
+        
+        
+        
+        bgImage.translateYProperty().set(HundredDays.getGame().getPlayerHandler().getPlayer().getYPos());
+        bgImage.translateXProperty().set(-HundredDays.getGame().getPlayerHandler().getPlayer().getXPos());
 
     }
     

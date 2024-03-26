@@ -23,6 +23,7 @@ public class HundredDays extends Application {
     private static Game game;
     private static Stage stage;
     private static Scene scene;
+    private static Object controller;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -59,6 +60,10 @@ public class HundredDays extends Application {
         return options;
     }
     
+    public static Object getController(){
+        return controller;
+    }
+    
     /**
      *
      * @param path path to the fxml document
@@ -69,7 +74,9 @@ public class HundredDays extends Application {
         System.out.println("Opened " + path + " screen");
         FXMLLoader loader = new FXMLLoader(HundredDays.class.getResource("screens/" + path + ".fxml"));
         stage.getScene().setRoot(loader.load());
-        return loader.getController();
+        controller = loader.getController();
+        System.out.println(controller);
+        return controller;
     }
     
     public static void saveOptions(){
@@ -111,6 +118,13 @@ public class HundredDays extends Application {
         }
         
         return null;
+    }
+    
+    @Override
+    public void stop(){
+        System.out.println("Stage is closing");
+        HundredDays.saveOptions();
+        HundredDays.getGame().close();
     }
 
 }

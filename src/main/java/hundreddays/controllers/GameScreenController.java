@@ -5,6 +5,7 @@
 package hundreddays.controllers;
 
 import hundreddays.HundredDays;
+import hundreddays.enums.KeyAction;
 import hundreddays.handlers.MapHandler;
 import java.io.IOException;
 import java.net.URL;
@@ -18,8 +19,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -31,9 +32,7 @@ public class GameScreenController implements Initializable {
     
     @FXML ImageView settingsButton;
     @FXML ImageView bgImage;
-    
-    
-    private MapHandler mapHandler = new MapHandler();
+    @FXML Label fpsLabel;
 
     @FXML private void openSettings(){
         System.out.println("Open Settings!!");
@@ -66,20 +65,14 @@ public class GameScreenController implements Initializable {
         }
         else if(alert.getResult() == exitButton){
             try {
+                //stop game
+                HundredDays.getGame().close();
                 HundredDays.setScreen("HomeScreen");
             } catch (IOException ex) {
                 System.out.println("Failed to load stage HomeScreen.fxml");
                 System.out.println(ex.getMessage());
                 System.exit(1);
             }
-        }
-    }
-    
-    @FXML private void onKeyPressed(KeyEvent key){
-        System.out.println(key);
-        if(key.getCode() == KeyCode.W){
-            HundredDays.getGame().player.moveBy(0, 0.5);
-            mapHandler.renderMap(bgImage);
         }
     }
     
@@ -90,23 +83,38 @@ public class GameScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        //on window key down
         HundredDays.getStage().addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent key) -> {
-            System.out.println(key);
-            if(key.getCode() == KeyCode.W){
-                HundredDays.getGame().player.moveBy(0, 0.5);
-            }
-            if(key.getCode() == KeyCode.S){        
-                HundredDays.getGame().player.moveBy(0, -0.5);
-            }
-            if(key.getCode() == KeyCode.A){
-                HundredDays.getGame().player.moveBy(0.5, 0);
-            }
-            if(key.getCode() == KeyCode.D){
-                HundredDays.getGame().player.moveBy(-0.5, 0);
-            }
+            //            System.out.println(key);
+            KeyAction action = HundredDays.getOptions().getAssociatedKeyAction(key.getCode());
             
-            mapHandler.renderMap(bgImage);
+            System.out.println("Pressed: " + action);
+            if(action != null){
+                HundredDays.getGame().getPlayerHandler().setActionState(action, true);
+            }
         });
-    }    
+        
+        //on window key released
+        HundredDays.getStage().addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent key) -> {
+            System.out.println("Relased");
+//            System.out.println(key);
+            KeyAction action = HundredDays.getOptions().getAssociatedKeyAction(key.getCode());
+            
+            if(action != null){
+                HundredDays.getGame().getPlayerHandler().setActionState(action, false);
+            }
+        });
+        
+        //start game
+        HundredDays.getGame().start(this);
+    }
     
+    public ImageView getBgImage(){
+        return bgImage;
+    }
+    
+    public Label getFpsLabel(){
+        return fpsLabel;
+    }
 }
