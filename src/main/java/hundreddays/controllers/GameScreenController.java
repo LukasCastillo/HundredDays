@@ -6,22 +6,19 @@ package hundreddays.controllers;
 
 import hundreddays.HundredDays;
 import hundreddays.enums.KeyAction;
-import hundreddays.handlers.MapHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  * FXML Controller class
@@ -33,6 +30,9 @@ public class GameScreenController implements Initializable {
     @FXML ImageView settingsButton;
     @FXML ImageView bgImage;
     @FXML Label fpsLabel;
+    
+    @FXML Pane bgPane;
+    @FXML Pane objectsPane;
 
     @FXML private void openSettings(){
         System.out.println("Open Settings!!");
@@ -106,6 +106,8 @@ public class GameScreenController implements Initializable {
             }
         });
         
+        HundredDays.getStage().getScene().setFill(Color.TRANSPARENT);
+        
         //start game
         HundredDays.getGame().start(this);
     }
@@ -117,4 +119,10 @@ public class GameScreenController implements Initializable {
     public Label getFpsLabel(){
         return fpsLabel;
     }
+    
+    public Pane getObjectsPane(){
+        return objectsPane;
+    }
+    
+    
 }

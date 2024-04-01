@@ -4,6 +4,8 @@
  */
 package hundreddays.model.GameObjects;
 
+import hundreddays.controllers.GameScreenController;
+
 /**
  *
  * @author TAU
@@ -19,10 +21,12 @@ public abstract class GameObject {
         this.texture = texture;
     }
     
-    public abstract void render(String screen); //placeholder for screen object
+    public abstract void render(GameScreenController controller);
     public abstract void onAttack(double damage);
     public abstract void onHover();
     public abstract void onUse();
+    public abstract void initialize(GameScreenController controller);
+    public abstract void dispose(GameScreenController controller);
 
     /**
      * @return the xPos

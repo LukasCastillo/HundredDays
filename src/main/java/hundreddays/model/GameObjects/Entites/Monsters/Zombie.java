@@ -3,6 +3,7 @@
  */
 package hundreddays.model.GameObjects.Entites.Monsters;
 
+import hundreddays.controllers.GameScreenController;
 import hundreddays.model.Items.Item;
 
 /**
@@ -40,7 +41,7 @@ public class Zombie extends Monster{
     }
 
     @Override
-    public void render(String screen) {
+    public void render(GameScreenController controller) {
         return;
     }
 
@@ -56,6 +57,16 @@ public class Zombie extends Monster{
 
     @Override
     public void onUse() {
+        return;
+    }
+
+    @Override
+    public void initialize(GameScreenController controller) {
+        return;
+    }
+
+    @Override
+    public void dispose(GameScreenController controller) {
         return;
     }
     

@@ -4,6 +4,7 @@
  */
 package hundreddays.model.GameObjects.Entites;
 
+import hundreddays.controllers.GameScreenController;
 import hundreddays.model.Interfaces.Collidable;
 import hundreddays.model.Items.Item;
 import java.util.ArrayList;
@@ -49,7 +50,7 @@ public class Base extends Entity implements Collidable{
     }
 
     @Override
-    public void render(String screen) {
+    public void render(GameScreenController controller) {
         return;
     }
 
@@ -89,6 +90,16 @@ public class Base extends Entity implements Collidable{
      */
     public ArrayList<Item> getInventory() {
         return inventory;
+    }
+
+    @Override
+    public void initialize(GameScreenController controller) {
+        return;
+    }
+
+    @Override
+    public void dispose(GameScreenController controller) {
+        return;
     }
     
 }

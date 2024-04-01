@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 /**
  * JavaFX HundredDays
@@ -25,12 +26,14 @@ public class HundredDays extends Application {
     private static Scene scene;
     private static Object controller;
 
+    //if project wont load build and clean first to init libraries
     @Override
     public void start(Stage stage) throws IOException {
         HundredDays.stage = stage;
         stage.setTitle("100 Days");
         
         scene = new Scene(new Pane(), 600, 400);
+        scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         setScreen("HomeScreen");
         stage.show();
