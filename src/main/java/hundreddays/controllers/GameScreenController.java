@@ -30,6 +30,7 @@ public class GameScreenController implements Initializable {
     @FXML ImageView settingsButton;
     @FXML ImageView bgImage;
     @FXML Label fpsLabel;
+    @FXML Label memoryLabel;
     
     @FXML Pane bgPane;
     @FXML Pane objectsPane;
@@ -124,5 +125,8 @@ public class GameScreenController implements Initializable {
         return objectsPane;
     }
     
+    public Label getMemoryLabel(){
+        return memoryLabel;
+    }
     
 }
