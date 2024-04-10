@@ -79,6 +79,8 @@ public class Game {
     
     public void update(){
         System.out.println("Updating!");
+        System.out.println("Game Objects:");
+        System.out.println(gameObjects);
         double currentUpdateTime = new Date().getTime();
         deltaTime = (currentUpdateTime - prevUpdateTime) / 1000;
         

@@ -36,7 +36,7 @@ public class Tree extends GameObject implements Collidable{
     public void render(GameScreenController controller) {
         treeView.setY(HundredDays.getGame().getPlayerHandler().getPlayer().getYPos() + yPos + HundredDays.getStage().getHeight() / 2);
         treeView.setX(-HundredDays.getGame().getPlayerHandler().getPlayer().getXPos() + xPos + HundredDays.getStage().getWidth()/ 2);
-//        System.out.println(yPos + " " + xPos);
+        System.out.println(yPos + " " + xPos);
     }
 
     @Override
