@@ -19,7 +19,7 @@ public class PlayerHandler {
     private double velX, velY;
     
     public static final double ACCELERATION = 20;
-    public static final double MAX_VELOCITY = 60;
+    public static final double MAX_VELOCITY = 100;
     
     public PlayerHandler(Character player){
         this.player = player;
