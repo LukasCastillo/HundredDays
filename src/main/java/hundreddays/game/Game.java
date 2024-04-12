@@ -111,7 +111,7 @@ public class Game {
         System.out.println(gameObjects);
         for(GameObject go : this.gameObjects){
             if(!(go instanceof Entity)) continue;
-            ((Entity) go).update(deltaTime);
+                ((Entity) go).update(deltaTime);
         }
     }
     
