@@ -17,7 +17,7 @@
    <children>
       <Pane fx:id="bgPane" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="bgImage" fitHeight="556.0" fitWidth="687.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0">
+            <ImageView fx:id="bgImage" fitHeight="556.0" fitWidth="687.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" translateX="278.0" translateY="278.0" x="300.0" y="200.0">
                <image>
                   <Image url="@../bg/map.png" />
                </image>
@@ -92,8 +92,7 @@
                         <Image url="@../ui/player.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="fpsLabel" layoutX="449.0" layoutY="14.0" prefHeight="17.0" prefWidth="89.0" text="FPS: " />
-                  <Label fx:id="memoryLabel" layoutX="449.0" layoutY="31.0" prefHeight="17.0" prefWidth="146.0" text="Mem: " />
+                  <Label fx:id="debugLabel" layoutX="14.0" layoutY="5.0" prefHeight="17.0" prefWidth="202.0" />
                </children>
             </AnchorPane>
          </center>

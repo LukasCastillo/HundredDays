@@ -9,6 +9,7 @@ import hundreddays.enums.KeyAction;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -16,6 +17,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -29,8 +31,7 @@ public class GameScreenController implements Initializable {
     
     @FXML ImageView settingsButton;
     @FXML ImageView bgImage;
-    @FXML Label fpsLabel;
-    @FXML Label memoryLabel;
+    @FXML Label debugLabel;
     
     @FXML Pane bgPane;
     @FXML Pane objectsPane;
@@ -91,6 +92,9 @@ public class GameScreenController implements Initializable {
             KeyAction action = HundredDays.getOptions().getAssociatedKeyAction(key.getCode());
             
             System.out.println("Pressed: " + action);
+            if(key.getCode() == KeyCode.Z) HundredDays.getGame().getCamera().zoom(0.1);
+            if(key.getCode() == KeyCode.X) HundredDays.getGame().getCamera().zoom(-0.1);
+            
             if(action != null){
                 HundredDays.getGame().getPlayerHandler().setActionState(action, true);
             }
@@ -107,7 +111,13 @@ public class GameScreenController implements Initializable {
             }
         });
         
-        HundredDays.getStage().getScene().setFill(Color.TRANSPARENT);
+        HundredDays.getStage().widthProperty().addListener((ObservableValue<? extends Number> ov, Number oldWidth, Number newWidth) -> {
+            HundredDays.getGame().getCamera().setViewW(newWidth.doubleValue());
+        });
+        
+        HundredDays.getStage().heightProperty().addListener((ObservableValue<? extends Number> ov, Number oldHeight, Number newHeight) -> {
+            HundredDays.getGame().getCamera().setViewH(newHeight.doubleValue());
+        });
         
         //start game
         HundredDays.getGame().start(this);
@@ -117,16 +127,11 @@ public class GameScreenController implements Initializable {
         return bgImage;
     }
     
-    public Label getFpsLabel(){
-        return fpsLabel;
+    public Label getDebugLabel(){
+        return debugLabel;
     }
     
     public Pane getObjectsPane(){
         return objectsPane;
     }
-    
-    public Label getMemoryLabel(){
-        return memoryLabel;
-    }
-    
 }

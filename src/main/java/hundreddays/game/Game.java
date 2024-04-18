@@ -4,8 +4,8 @@
  */
 package hundreddays.game;
 
-import hundreddays.HundredDays;
 import hundreddays.controllers.GameScreenController;
+import hundreddays.handlers.Camera;
 import hundreddays.handlers.MapHandler;
 import hundreddays.handlers.PlayerHandler;
 import hundreddays.model.Character;
@@ -15,13 +15,7 @@ import hundreddays.model.GameObjects.Tree;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
-import javafx.util.Duration;
 
 /**
  *
@@ -31,6 +25,7 @@ public class Game {
     private PlayerHandler playerHandler;
     
     private MapHandler mapHandler = new MapHandler();
+    private Camera camera;
     
     private ArrayList<GameObject> gameObjects;
     private ArrayList<GameObject> objectsToAdd;
@@ -38,12 +33,13 @@ public class Game {
     
     AnimationTimer gameTimer;
     private double prevUpdateTime = 0;
-    public static final int UPDATE_PERIOD = 50;
+    public static final double UPDATE_PERIOD = 16.7;
     private GameScreenController controller;
     private double deltaTime = 0;
     
     public Game(){
         playerHandler = new PlayerHandler(new Character("Lukas", 100, 100, 20, 10, "Swordsman", 0, 0));
+        camera = new Camera(0, 0, 400, 600, 400, 600);
         controller = null;
         gameTimer = null;
         
@@ -66,6 +62,14 @@ public class Game {
             @Override
             public void handle(long l) {
                 try{
+                    double currentUpdateTime = new Date().getTime();
+                    if((currentUpdateTime - prevUpdateTime) < UPDATE_PERIOD) return;
+                    
+                    deltaTime = (currentUpdateTime - prevUpdateTime) / 1000;
+                    if(deltaTime > 0.5) System.out.println("Lag spike!!");
+
+                    prevUpdateTime = currentUpdateTime;
+
                     update();
                     render();
                 }catch(Exception e){
@@ -73,6 +77,7 @@ public class Game {
                 }
             }
         };
+ 
         
         gameTimer.start();
     }
@@ -81,12 +86,6 @@ public class Game {
         System.out.println("Updating!");
         System.out.println("Game Objects:");
         System.out.println(gameObjects);
-        double currentUpdateTime = new Date().getTime();
-        deltaTime = (currentUpdateTime - prevUpdateTime) / 1000;
-        
-        if(deltaTime > 0.5) System.out.println("Lag spike!!");
-        
-        prevUpdateTime = currentUpdateTime;
         
         //update player
         playerHandler.update(deltaTime);
@@ -108,7 +107,6 @@ public class Game {
         this.objectsToDelete.clear();
         
         //update entites
-        System.out.println(gameObjects);
         for(GameObject go : this.gameObjects){
             if(!(go instanceof Entity)) continue;
                 ((Entity) go).update(deltaTime);
@@ -131,9 +129,9 @@ public class Game {
         System.out.println("Rendering " + this.gameObjects.size() + " game objects!");
         
         //debug
-        controller.getFpsLabel().setText("FPS: " + (1 / deltaTime));
-        long allocatedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-        controller.getMemoryLabel().setText(String.format("Mem: %dMB/%dMB", allocatedMemory / 1000000, Runtime.getRuntime().maxMemory() / 1000000));
+//        controller.getFpsLabel().setText("FPS: " + (1 / deltaTime));
+//        long allocatedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+//        controller.getMemoryLabel().setText(String.format("Mem: %dMB/%dMB", allocatedMemory / 1000000, Runtime.getRuntime().maxMemory() / 1000000));
     }
     
     public void close(){
@@ -153,5 +151,12 @@ public class Game {
     
     public void deleteGameObject(GameObject go){
         this.objectsToDelete.add(go);
+    }
+
+    /**
+     * @return the camera
+     */
+    public Camera getCamera() {
+        return camera;
     }
 }
