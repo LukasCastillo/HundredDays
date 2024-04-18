@@ -6,6 +6,7 @@ package hundreddays.game;
 
 import hundreddays.controllers.GameScreenController;
 import hundreddays.handlers.Camera;
+import hundreddays.handlers.DebugHandler;
 import hundreddays.handlers.MapHandler;
 import hundreddays.handlers.PlayerHandler;
 import hundreddays.model.Character;
@@ -26,14 +27,18 @@ public class Game {
     
     private MapHandler mapHandler = new MapHandler();
     private Camera camera;
+    private DebugHandler debugHandler = new DebugHandler();
     
     private ArrayList<GameObject> gameObjects;
     private ArrayList<GameObject> objectsToAdd;
     private ArrayList<GameObject> objectsToDelete;
     
+    public static final float GAME_DAY = 30; // in seconds
+    private float gameSeconds = 0;
+    
     AnimationTimer gameTimer;
     private double prevUpdateTime = 0;
-    public static final double UPDATE_PERIOD = 16.7;
+    public static final double UPDATE_PERIOD = 16.7; // in milliseconds
     private GameScreenController controller;
     private double deltaTime = 0;
     
@@ -80,12 +85,15 @@ public class Game {
  
         
         gameTimer.start();
+        
+        mapHandler.initialize(controller.getBgImage());
     }
     
     public void update(){
         System.out.println("Updating!");
-        System.out.println("Game Objects:");
-        System.out.println(gameObjects);
+        
+        //update time
+        gameSeconds += deltaTime;
         
         //update player
         playerHandler.update(deltaTime);
@@ -116,10 +124,17 @@ public class Game {
     public void render(){
         if(controller == null) return;
         
+        controller.getDayLabel().setText("Day: " + this.getGameDay());
+        
         //render map
         mapHandler.renderMap(controller.getBgImage());
         
+        //day
+        double dayOpacity = Math.max(0, -(0.4 / GAME_DAY) * (Math.pow(this.getGameTime() - GAME_DAY / 2, 2) - Math.pow(GAME_DAY / 4, 2)));
+        controller.getDayPane().setOpacity(dayOpacity);
+        
         //render player
+        playerHandler.render();
         
         //render objects
         for(GameObject go : this.gameObjects){
@@ -129,9 +144,13 @@ public class Game {
         System.out.println("Rendering " + this.gameObjects.size() + " game objects!");
         
         //debug
-//        controller.getFpsLabel().setText("FPS: " + (1 / deltaTime));
-//        long allocatedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-//        controller.getMemoryLabel().setText(String.format("Mem: %dMB/%dMB", allocatedMemory / 1000000, Runtime.getRuntime().maxMemory() / 1000000));
+        long allocatedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        
+        debugHandler.addDebug("Pos", String.format("%.2f %.2f", playerHandler.getPlayer().getXPos(), playerHandler.getPlayer().getYPos()));
+        debugHandler.addDebug("FPS", (1 / deltaTime));
+        debugHandler.addDebug("Mem", String.format("%dMB/%dMB", allocatedMemory / 1000000, Runtime.getRuntime().maxMemory() / 1000000));
+        debugHandler.addDebug("sec", this.getGameSeconds());
+        debugHandler.render(controller.getDebugLabel());
     }
     
     public void close(){
@@ -158,5 +177,17 @@ public class Game {
      */
     public Camera getCamera() {
         return camera;
+    }
+    
+    public float getGameSeconds(){
+        return gameSeconds;
+    }
+    
+    public float getGameTime(){
+        return gameSeconds % GAME_DAY;
+    }
+    
+    public int getGameDay(){
+        return (int) Math.floor(gameSeconds / GAME_DAY);
     }
 }

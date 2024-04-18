@@ -32,9 +32,11 @@ public class GameScreenController implements Initializable {
     @FXML ImageView settingsButton;
     @FXML ImageView bgImage;
     @FXML Label debugLabel;
+    @FXML Label dayLabel;
     
     @FXML Pane bgPane;
     @FXML Pane objectsPane;
+    @FXML Pane dayPane;
 
     @FXML private void openSettings(){
         System.out.println("Open Settings!!");
@@ -133,5 +135,13 @@ public class GameScreenController implements Initializable {
     
     public Pane getObjectsPane(){
         return objectsPane;
+    }
+    
+    public Label getDayLabel(){
+        return dayLabel;
+    }
+    
+    public Pane getDayPane(){
+        return dayPane;
     }
 }

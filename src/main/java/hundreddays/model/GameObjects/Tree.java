@@ -28,6 +28,7 @@ public class Tree extends GameObject implements Collidable{
         this.height = height;
         
         treeView = new ImageView(new Image(HundredDays.class.getResource(TREE1).toString()));
+        treeView.smoothProperty().set(false);
         System.out.println("Tree");
         System.out.println(treeView);
     }
