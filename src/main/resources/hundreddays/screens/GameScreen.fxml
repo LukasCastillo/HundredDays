@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hundreddays.controllers.GameScreenController">
+<StackPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hundreddays.controllers.GameScreenController">
    <children>
       <Pane fx:id="bgPane" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fx:id="bgImage" fitHeight="556.0" fitWidth="687.0" pickOnBounds="true" preserveRatio="true" scaleX="2.0" scaleY="2.0" smooth="false" translateX="278.0" translateY="278.0" x="300.0" y="200.0">
+            <ImageView fx:id="bgImage" fitHeight="556.0" fitWidth="687.0" pickOnBounds="true" preserveRatio="true" scaleY="2.0" smooth="false" translateX="278.0" translateY="278.0" x="300.0" y="200.0">
                <image>
                   <Image url="@../bg/map.png" />
                </image>
@@ -37,27 +37,42 @@
                      <children>
                         <Pane HBox.hgrow="NEVER">
                            <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ui/inventoryTile.png" />
+                                 </image></ImageView>
                            </children>
                         </Pane>
                         <Pane>
                            <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ui/inventoryTile.png" />
+                                 </image></ImageView>
                            </children>
                         </Pane>
                         <Pane>
                            <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ui/inventoryTile.png" />
+                                 </image></ImageView>
                            </children>
                         </Pane>
                         <Pane>
                            <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ui/inventoryTile.png" />
+                                 </image></ImageView>
                            </children>
                         </Pane>
                         <Pane>
                            <children>
-                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                                 <image>
+                                    <Image url="@../ui/inventoryTile.png" />
+                                 </image></ImageView>
                            </children>
                         </Pane>
                      </children>
@@ -83,11 +98,6 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="playerImage" fitHeight="164.0" fitWidth="66.0" layoutX="267.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../ui/player.png" />
-                     </image>
-                  </ImageView>
                   <Label fx:id="debugLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="5.0" prefHeight="251.0" prefWidth="202.0" />
                </children>
             </AnchorPane>

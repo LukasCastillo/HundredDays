@@ -33,7 +33,7 @@ public class Game {
     private ArrayList<GameObject> objectsToAdd;
     private ArrayList<GameObject> objectsToDelete;
     
-    public static final float GAME_DAY = 30; // in seconds
+    public static final float GAME_DAY = 120; // in seconds
     private float gameSeconds = 0;
     
     AnimationTimer gameTimer;
@@ -70,8 +70,8 @@ public class Game {
                     double currentUpdateTime = new Date().getTime();
                     if((currentUpdateTime - prevUpdateTime) < UPDATE_PERIOD) return;
                     
-                    deltaTime = (currentUpdateTime - prevUpdateTime) / 1000;
-                    if(deltaTime > 0.5) System.out.println("Lag spike!!");
+                    setDeltaTime((currentUpdateTime - prevUpdateTime) / 1000);
+                    if(getDeltaTime() > 0.5) System.out.println("Lag spike!!");
 
                     prevUpdateTime = currentUpdateTime;
 
@@ -85,7 +85,7 @@ public class Game {
  
         
         gameTimer.start();
-        
+        playerHandler.initialize(controller);
         mapHandler.initialize(controller.getBgImage());
     }
     
@@ -93,10 +93,10 @@ public class Game {
         System.out.println("Updating!");
         
         //update time
-        gameSeconds += deltaTime;
+        gameSeconds += getDeltaTime();
         
         //update player
-        playerHandler.update(deltaTime);
+        playerHandler.update(getDeltaTime());
         
         //add game objects
         for(GameObject go : this.objectsToAdd){
@@ -117,7 +117,7 @@ public class Game {
         //update entites
         for(GameObject go : this.gameObjects){
             if(!(go instanceof Entity)) continue;
-                ((Entity) go).update(deltaTime);
+                ((Entity) go).update(getDeltaTime());
         }
     }
     
@@ -130,11 +130,12 @@ public class Game {
         mapHandler.renderMap(controller.getBgImage());
         
         //day
-        double dayOpacity = Math.max(0, -(0.4 / GAME_DAY) * (Math.pow(this.getGameTime() - GAME_DAY / 2, 2) - Math.pow(GAME_DAY / 4, 2)));
+        //made funny equation in desmos
+        double dayOpacity = 0.5 * Math.max(0, -(10 / (0.625 * Math.pow(GAME_DAY, 2))) * (Math.pow(this.getGameTime() - GAME_DAY / 2, 2) - Math.pow(GAME_DAY / 4, 2)));
         controller.getDayPane().setOpacity(dayOpacity);
         
         //render player
-        playerHandler.render();
+        playerHandler.render(controller, getDeltaTime());
         
         //render objects
         for(GameObject go : this.gameObjects){
@@ -147,7 +148,7 @@ public class Game {
         long allocatedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         
         debugHandler.addDebug("Pos", String.format("%.2f %.2f", playerHandler.getPlayer().getXPos(), playerHandler.getPlayer().getYPos()));
-        debugHandler.addDebug("FPS", (1 / deltaTime));
+        debugHandler.addDebug("FPS", (1 / getDeltaTime()));
         debugHandler.addDebug("Mem", String.format("%dMB/%dMB", allocatedMemory / 1000000, Runtime.getRuntime().maxMemory() / 1000000));
         debugHandler.addDebug("sec", this.getGameSeconds());
         debugHandler.render(controller.getDebugLabel());
@@ -155,7 +156,7 @@ public class Game {
     
     public void close(){
         System.out.println("Game Stopped");
-        gameTimer.stop();
+        if(gameTimer != null) gameTimer.stop();
         gameTimer = null;
         controller = null;
     }
@@ -189,5 +190,26 @@ public class Game {
     
     public int getGameDay(){
         return (int) Math.floor(gameSeconds / GAME_DAY);
+    }
+
+    /**
+     * @return the debugHandler
+     */
+    public DebugHandler getDebugHandler() {
+        return debugHandler;
+    }
+
+    /**
+     * @return the deltaTime
+     */
+    public double getDeltaTime() {
+        return deltaTime;
+    }
+
+    /**
+     * @param deltaTime the deltaTime to set
+     */
+    public void setDeltaTime(double deltaTime) {
+        this.deltaTime = deltaTime;
     }
 }

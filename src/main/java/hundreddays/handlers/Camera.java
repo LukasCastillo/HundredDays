@@ -14,6 +14,7 @@ public class Camera {
     private double centerX, centerY;
     private double viewH, viewW;
     private double worldH, worldW;
+    private double zoom;
     
     public Camera(double centerX, double centerY, double viewH, double viewW, double worldH, double worldW){
         this.centerX = centerX;
@@ -22,49 +23,58 @@ public class Camera {
         this.viewH = viewH;
         this.worldH = worldH;
         this.worldW = worldW;
+        this.zoom = 1;
     }
     
+    
+    /**
+     * Changes scale and position of the image to match the perspective of the camera
+     * 
+     * @param view ImageView to update
+     * @param imageX center X position
+     * @param imageY center Y position
+     */
     public void renderImage(ImageView view, double imageX, double imageY){
+        view.scaleXProperty().set(viewW / worldW * zoom);
+        view.scaleYProperty().set(viewH / worldH * zoom);
         
-        double aspectRatio = view.getImage().getWidth() / view.getImage().getHeight();
-        double imgW = Math.min(view.getFitWidth(), view.getFitHeight() * aspectRatio);
-        double imgH = Math.min(view.getFitHeight(), view.getFitWidth() / aspectRatio);
+        double imgW = view.boundsInParentProperty().get().getWidth() / view.scaleXProperty().doubleValue();
+        double imgH = view.boundsInParentProperty().get().getHeight()/ view.scaleYProperty().doubleValue();
         
-        view.setX(viewW / 2);
-        view.setY(viewH / 2);
+        view.setX(viewW / 2 - view.boundsInParentProperty().get().getWidth() / 2);
+        view.setY(viewH / 2 - view.boundsInParentProperty().get().getHeight()/ 2);
         
-        view.scaleXProperty().set(viewW / worldW);
-        view.scaleYProperty().set(viewH / worldH);
-        
-        double offsetX = imgW / 2 - imgW * (viewW / worldW) / 2;
-        double offsetY = imgH / 2 - imgH * (viewH / worldH) / 2;
-        
-        double playX = -HundredDays.getGame().getPlayerHandler().getPlayer().getXPos();
-        double playY = HundredDays.getGame().getPlayerHandler().getPlayer().getYPos();
-        
+        double offsetX = imgW / 2 - imgW * (viewW / worldW * zoom) / 2;
+        double offsetY = imgH / 2 - imgH * (viewH / worldH * zoom) / 2;
+
 //        System.out.println("Camera:");
+//        System.out.println("Dimen: " + imgW + " " + imgH);
 //        System.out.println(imageX + " " + imageY + " " + offsetX + " " + offsetY);
 //        System.out.println(imgW + " " + imgH);
-//        System.out.println("Zoom: " + viewW / worldW + "  " + viewH / worldH);
+//        System.out.println("Zoom: " + zoom);
+//        System.out.println(viewW + " " + viewH + " | " + worldW + " " + worldH  );
         
-        view.translateXProperty().set((imageX + playX) * (viewW / worldW) - offsetX);
-        view.translateYProperty().set((imageY + playY) * (viewH / worldH) - offsetY);
+        view.translateXProperty().set((imageX - centerX) * (viewW / worldW * zoom) - offsetX);
+        view.translateYProperty().set((imageY - centerY) * (viewH / worldH * zoom) - offsetY);
         
-//        System.out.println("pos: " + viewW / 2 + " " + viewH / 2);
-//        System.out.println("scale: " + (viewW / worldW) + " " + viewH / worldH);
-//        System.out.println("translate: " + (imageX - offsetX - HundredDays.getGame().getPlayerHandler().getPlayer().getXPos()) + " " + (imageY - offsetY + HundredDays.getGame().getPlayerHandler().getPlayer().getYPos()));
+//        System.out.println("pos: " + view.getX() + " " + view.getY());
+//        System.out.println("scale: " + view.scaleXProperty().get() + " " + view.scaleYProperty().get());
+//        System.out.println("translate: " + view.translateXProperty().get() + " " + view.translateYProperty().get());
     }
     
     public void zoom(double z){
-        double zoomZ = viewW / worldW;
-        double zoomY = viewH / worldH;
-        this.worldW = viewW / (z + zoomZ);
-        this.worldH = viewH / (z + zoomY);
+//        double zoomZ = viewW / worldW;
+//        double zoomY = viewH / worldH;
+//        this.worldW = viewW / (z + zoomZ);
+//        this.worldH = viewH / (z + zoomY);
+        
+        zoom += z;
     }
     
     public void setZoom(double z){
-        this.worldW = viewW / z;
-        this.worldH = viewH / z;
+//        this.worldW = viewW / z;
+//        this.worldH = viewH / z;
+        zoom = z;
     }
 
     /**

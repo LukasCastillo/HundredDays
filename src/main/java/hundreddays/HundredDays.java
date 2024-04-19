@@ -48,6 +48,8 @@ public class HundredDays extends Application {
             Gson gson = new Gson();
             options = gson.fromJson(optionsString, Options.class);
         }
+        
+        if(options == null) options = new Options();
     }
 
     

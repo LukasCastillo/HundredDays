@@ -20,6 +20,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 /**
@@ -37,6 +38,7 @@ public class GameScreenController implements Initializable {
     @FXML Pane bgPane;
     @FXML Pane objectsPane;
     @FXML Pane dayPane;
+    @FXML StackPane rootPane;
 
     @FXML private void openSettings(){
         System.out.println("Open Settings!!");
@@ -113,11 +115,11 @@ public class GameScreenController implements Initializable {
             }
         });
         
-        HundredDays.getStage().widthProperty().addListener((ObservableValue<? extends Number> ov, Number oldWidth, Number newWidth) -> {
+        rootPane.widthProperty().addListener((ObservableValue<? extends Number> ov, Number oldWidth, Number newWidth) -> {
             HundredDays.getGame().getCamera().setViewW(newWidth.doubleValue());
         });
         
-        HundredDays.getStage().heightProperty().addListener((ObservableValue<? extends Number> ov, Number oldHeight, Number newHeight) -> {
+        rootPane.heightProperty().addListener((ObservableValue<? extends Number> ov, Number oldHeight, Number newHeight) -> {
             HundredDays.getGame().getCamera().setViewH(newHeight.doubleValue());
         });
         
