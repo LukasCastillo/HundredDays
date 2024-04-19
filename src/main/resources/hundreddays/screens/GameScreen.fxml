@@ -79,19 +79,31 @@
                   </HBox>
                </left>
                <right>
-                  <HBox alignment="CENTER_RIGHT" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+                  <StackPane BorderPane.alignment="CENTER">
                      <children>
-                        <Label fx:id="dayLabel" prefHeight="17.0" prefWidth="44.0" text="Days: " />
-                        <ImageView fx:id="settingsButton" fitHeight="25.0" fitWidth="25.0" onMousePressed="#openSettings" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="57.0" fitWidth="200.0" pickOnBounds="true">
                            <image>
-                              <Image url="@../ui/pause.png" />
+                              <Image url="@../ui/header.png" />
                            </image>
                         </ImageView>
+                        <HBox fx:id="header" alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="190.0" spacing="20.0">
+                           <children>
+                              <Label fx:id="dayLabel" prefHeight="17.0" prefWidth="44.0" text="Days: " />
+                              <ImageView fx:id="pauseButton" fitHeight="39.0" fitWidth="41.0" onMouseEntered="#settingsMouseEntered" onMouseExited="#settingsMouseExited" onMousePressed="#pauseAction" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../ui/pause.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <StackPane.margin>
+                              <Insets right="10.0" />
+                           </StackPane.margin>
+                        </HBox>
                      </children>
                      <BorderPane.margin>
-                        <Insets bottom="10.0" right="10.0" top="10.0" />
+                        <Insets right="10.0" />
                      </BorderPane.margin>
-                  </HBox>
+                  </StackPane>
                </right>
             </BorderPane>
          </top>

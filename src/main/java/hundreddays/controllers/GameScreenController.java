@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -30,7 +31,10 @@ import javafx.scene.paint.Color;
  */
 public class GameScreenController implements Initializable {
     
-    @FXML ImageView settingsButton;
+    private Image pauseImage;
+    private Image pauseHoveredImage;
+    
+    @FXML ImageView pauseButton;
     @FXML ImageView bgImage;
     @FXML Label debugLabel;
     @FXML Label dayLabel;
@@ -40,7 +44,7 @@ public class GameScreenController implements Initializable {
     @FXML Pane dayPane;
     @FXML StackPane rootPane;
 
-    @FXML private void openSettings(){
+    @FXML private void pauseAction(){
         System.out.println("Open Settings!!");
         Alert alert = new Alert(AlertType.NONE);
         alert.setTitle("Game Paused");
@@ -80,6 +84,14 @@ public class GameScreenController implements Initializable {
                 System.exit(1);
             }
         }
+    }
+    
+    @FXML private void settingsMouseEntered(){
+        pauseButton.setImage(pauseHoveredImage);
+    }
+    
+    @FXML private void settingsMouseExited(){
+        pauseButton.setImage(pauseImage);
     }
     
     /**
@@ -122,6 +134,9 @@ public class GameScreenController implements Initializable {
         rootPane.heightProperty().addListener((ObservableValue<? extends Number> ov, Number oldHeight, Number newHeight) -> {
             HundredDays.getGame().getCamera().setViewH(newHeight.doubleValue());
         });
+        
+        pauseImage = new Image(HundredDays.class.getResource("ui/pause.png").toString());
+        pauseHoveredImage = new Image(HundredDays.class.getResource("ui/pause_down.png").toString());
         
         //start game
         HundredDays.getGame().start(this);
