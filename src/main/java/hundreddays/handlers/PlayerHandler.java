@@ -62,8 +62,8 @@ public class PlayerHandler {
         double targetX = 0;
         double targetY = 0;
         
-        if(actionStateMap.get(KeyAction.MOVE_UP)) targetY += 1;
-        if(actionStateMap.get(KeyAction.MOVE_DOWN)) targetY += -1;
+        if(actionStateMap.get(KeyAction.MOVE_UP)) targetY += -1;
+        if(actionStateMap.get(KeyAction.MOVE_DOWN)) targetY += 1;
         if(actionStateMap.get(KeyAction.MOVE_RIGHT)) targetX += 1;
         if(actionStateMap.get(KeyAction.MOVE_LEFT)) targetX += -1;
         
@@ -89,7 +89,7 @@ public class PlayerHandler {
                 if(velX > 0) direction = 3;
                 else direction = 1;
             }else{
-                if(velY > 0) direction = 0;
+                if(velY < 0) direction = 0;
                 else direction = 2;
             }
         }
@@ -103,7 +103,7 @@ public class PlayerHandler {
         
         player.moveBy(velX * deltaT, velY * deltaT);
         HundredDays.getGame().getCamera().setCenterX(player.getXPos());
-        HundredDays.getGame().getCamera().setCenterY(-player.getYPos());
+        HundredDays.getGame().getCamera().setCenterY(player.getYPos());
     }
     
     public void render(GameScreenController controller, double deltaT){
@@ -124,8 +124,9 @@ public class PlayerHandler {
         
         
         playerView.setViewport(new Rectangle2D((frameNo * IMAGE_WIDTH), frameType * IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_HEIGHT));
-        HundredDays.getGame().getCamera().renderImage(playerView, player.getXPos(), -player.getYPos());
+        HundredDays.getGame().getCamera().renderImage(playerView, player.getXPos(), player.getYPos());
         if(direction == 1) playerView.scaleXProperty().set(-Math.abs(playerView.scaleXProperty().get()));
+        playerView.setViewOrder(-player.getYPos());
     }
     
     public Character getPlayer(){

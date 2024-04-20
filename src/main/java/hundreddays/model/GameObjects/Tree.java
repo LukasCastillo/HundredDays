@@ -47,6 +47,7 @@ public class Tree extends GameObject implements Collidable{
     @Override
     public void render(GameScreenController controller) {
         HundredDays.getGame().getCamera().renderImage(treeView, xPos, yPos);
+        treeView.setViewOrder(-yPos);
 //        System.out.println(yPos + " " + xPos);
     }
 
