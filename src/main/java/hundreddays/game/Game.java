@@ -52,9 +52,9 @@ public class Game {
         objectsToAdd = new ArrayList();
         objectsToDelete = new ArrayList();
         
-        for(int i = 0; i < 100; i++){
+        for(int i = 0; i < 300; i++){
             Random random = new Random();
-            addGameObject(new Tree(random.nextInt(1000), random.nextInt(1000), 1));
+            addGameObject(new Tree(random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, 1));
         }
     }
     
