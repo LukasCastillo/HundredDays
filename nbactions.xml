@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <actions>
+<actions>
         <action>
             <actionName>run</actionName>
             <packagings>
@@ -35,6 +35,18 @@
                 <!-- compile not needed with javafx-maven-plugin v0.0.5 -->
                 <goal>compile</goal>
                 <goal>javafx:jlink</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>rebuild</actionName>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                <goal>-c</goal>
+                <goal>-X</goal>
             </goals>
         </action>
     </actions>

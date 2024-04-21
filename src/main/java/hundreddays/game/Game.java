@@ -87,6 +87,7 @@ public class Game {
         gameTimer.start();
         playerHandler.initialize(controller);
         mapHandler.initialize(controller.getBgImage());
+        for(GameObject go : gameObjects) go.initialize(controller);
     }
     
     public void update(){
@@ -100,7 +101,7 @@ public class Game {
         
         //add game objects
         for(GameObject go : this.objectsToAdd){
-            this.gameObjects.add(go);
+            this.getGameObjects().add(go);
             go.initialize(controller);
             System.out.println("Added Entity");
             System.out.println(go);
@@ -109,13 +110,13 @@ public class Game {
         
         //delete game objects
         for(GameObject go : this.objectsToDelete){
-            this.gameObjects.remove(go);
+            this.getGameObjects().remove(go);
             go.dispose(controller);
         }
         this.objectsToDelete.clear();
         
         //update entites
-        for(GameObject go : this.gameObjects){
+        for(GameObject go : this.getGameObjects()){
             if(!(go instanceof Entity)) continue;
                 ((Entity) go).update(getDeltaTime());
         }
@@ -138,11 +139,11 @@ public class Game {
         playerHandler.render(controller, getDeltaTime());
         
         //render objects
-        for(GameObject go : this.gameObjects){
+        for(GameObject go : this.getGameObjects()){
             go.render(controller);
         } 
         
-        System.out.println("Rendering " + this.gameObjects.size() + " game objects!");
+        System.out.println("Rendering " + this.getGameObjects().size() + " game objects!");
         
         //debug
         long allocatedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
@@ -211,5 +212,12 @@ public class Game {
      */
     public void setDeltaTime(double deltaTime) {
         this.deltaTime = deltaTime;
+    }
+
+    /**
+     * @return the gameObjects
+     */
+    public ArrayList<GameObject> getGameObjects() {
+        return gameObjects;
     }
 }

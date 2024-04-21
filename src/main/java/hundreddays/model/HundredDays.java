@@ -30,10 +30,10 @@ public class HundredDays {
             player.moveBy(1, 0);
             System.out.printf("Player moved to postion: %f, %f\n", player.getXPos(), player.getYPos());
             
-            if(rock.collidesWith(new double[] {player.getXPos(), player.getYPos(), 1, 1})){
-                player.moveBy(-1, 0);
-                System.out.println("Plater collided!");
-            }
+//            if(rock.collidesWith(new double[] {player.getXPos(), player.getYPos(), 1, 1})){
+//                player.moveBy(-1, 0);
+//                System.out.println("Plater collided!");
+//            }
         }
         
         

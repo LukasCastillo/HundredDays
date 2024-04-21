@@ -4,6 +4,7 @@
 package hundreddays.handlers;
 
 import hundreddays.HundredDays;
+import hundreddays.model.Hitbox;
 import javafx.scene.image.ImageView;
 
 /**
@@ -60,6 +61,25 @@ public class Camera {
 //        System.out.println("pos: " + view.getX() + " " + view.getY());
 //        System.out.println("scale: " + view.scaleXProperty().get() + " " + view.scaleYProperty().get());
 //        System.out.println("translate: " + view.translateXProperty().get() + " " + view.translateYProperty().get());
+    }
+    
+    /**
+     * Changes scale and position of the hitbox to match the perspective of the camera
+     * 
+     * @param hitbox hitbox to render
+     */
+    public void renderHitbox(Hitbox hitbox){
+        hitbox.getRect().scaleXProperty().set(viewW / worldW * zoom);
+        hitbox.getRect().scaleYProperty().set(viewH / worldH * zoom);
+        
+        hitbox.getRect().setX(viewW / 2 - hitbox.getRect().boundsInParentProperty().get().getWidth() / 2);
+        hitbox.getRect().setY(viewH / 2 - hitbox.getRect().boundsInParentProperty().get().getHeight()/ 2);
+        
+        double offsetX = hitbox.getWidth() / 2 - hitbox.getWidth() * (viewW / worldW * zoom) / 2;
+        double offsetY = hitbox.getHeight() / 2 - hitbox.getHeight() * (viewH / worldH * zoom) / 2;
+        
+        hitbox.getRect().translateXProperty().set((hitbox.getCenterX() - centerX) * (viewW / worldW * zoom) - offsetX);
+        hitbox.getRect().translateYProperty().set((hitbox.getCenterY() - centerY) * (viewH / worldH * zoom) - offsetY);
     }
     
     public void zoom(double z){

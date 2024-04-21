@@ -182,5 +182,9 @@ public class Character {
         this.selectedItem = selectedItem;
     }
     
+    public void setPosition(double x, double y){
+        this.xPos = x;
+        this.yPos = y;
+    }
     
 }

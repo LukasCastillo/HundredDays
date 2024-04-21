@@ -8,6 +8,9 @@ import hundreddays.HundredDays;
 import hundreddays.controllers.GameScreenController;
 import hundreddays.enums.KeyAction;
 import hundreddays.model.Character;
+import hundreddays.model.GameObjects.GameObject;
+import hundreddays.model.Hitbox;
+import hundreddays.model.Interfaces.Collidable;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.geometry.Rectangle2D;
@@ -24,6 +27,7 @@ public class PlayerHandler {
     private double velX, velY;
     private int direction = 0; //0 - up, 1 - left, 2 - down, 3 - right
     private ImageView playerView;
+    private Hitbox hitbox;
     
     private final int IMAGE_WIDTH = 48;
     private final int IMAGE_HEIGHT = 48;
@@ -43,6 +47,7 @@ public class PlayerHandler {
         }
         playerView = new ImageView(new Image(HundredDays.class.getResource("player/player.png").toString()));
         playerView.setViewport(new Rectangle2D(0, 0, IMAGE_WIDTH, IMAGE_HEIGHT));
+        hitbox = new Hitbox(player.getXPos(), player.getYPos() + 10, 9, 15);
     }
     
     public PlayerHandler(){
@@ -51,6 +56,7 @@ public class PlayerHandler {
     
     public void initialize(GameScreenController controller){
         controller.getObjectsPane().getChildren().add(playerView);
+        controller.getObjectsPane().getChildren().add(hitbox.getRect());
     }
     
     public void setActionState(KeyAction ke, boolean state){
@@ -101,7 +107,17 @@ public class PlayerHandler {
         System.out.println("Change in pos: " + velX * deltaT + " " + velY * deltaT);
         System.out.println("DeltaT: " + deltaT);
         
-        player.moveBy(velX * deltaT, velY * deltaT);
+        this.moveBy(velX * deltaT, velY * deltaT);
+        
+        for(GameObject go : HundredDays.getGame().getGameObjects()){
+            if(!(go instanceof Collidable)) continue;
+            Collidable co = (Collidable) go;
+            if(!co.getHitbox().intersects(hitbox)) continue;
+            System.out.println("Collided!!!");
+            hitbox.pushOut(co.getHitbox());
+            player.setPosition(hitbox.getCenterX(), hitbox.getCenterY() - 10);
+        }
+        
         HundredDays.getGame().getCamera().setCenterX(player.getXPos());
         HundredDays.getGame().getCamera().setCenterY(player.getYPos());
     }
@@ -125,6 +141,7 @@ public class PlayerHandler {
         
         playerView.setViewport(new Rectangle2D((frameNo * IMAGE_WIDTH), frameType * IMAGE_HEIGHT, IMAGE_WIDTH, IMAGE_HEIGHT));
         HundredDays.getGame().getCamera().renderImage(playerView, player.getXPos(), player.getYPos());
+        HundredDays.getGame().getCamera().renderHitbox(hitbox);
         if(direction == 1) playerView.scaleXProperty().set(-Math.abs(playerView.scaleXProperty().get()));
         playerView.setViewOrder(-player.getYPos());
     }
@@ -135,5 +152,10 @@ public class PlayerHandler {
     
     public boolean isMoving(){
         return Math.abs(velX) > 1e-3 || Math.abs(velY) > 1e-3;
+    }
+    
+    public void moveBy(double dX, double dY){
+        player.moveBy(dX, dY);
+        hitbox.setPosition(player.getXPos(), player.getYPos() + 10);
     }
 }

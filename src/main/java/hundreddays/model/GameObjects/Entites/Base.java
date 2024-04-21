@@ -5,6 +5,7 @@
 package hundreddays.model.GameObjects.Entites;
 
 import hundreddays.controllers.GameScreenController;
+import hundreddays.model.Hitbox;
 import hundreddays.model.Interfaces.Collidable;
 import hundreddays.model.Items.Item;
 import java.util.ArrayList;
@@ -70,11 +71,6 @@ public class Base extends Entity implements Collidable{
     }
 
     @Override
-    public boolean collidesWith(double[] hitbox) {
-        return false;
-    }
-
-    @Override
     public void update(double deltaTime) {
     }
 
@@ -100,6 +96,11 @@ public class Base extends Entity implements Collidable{
     @Override
     public void dispose(GameScreenController controller) {
         return;
+    }
+
+    @Override
+    public Hitbox getHitbox() {
+        return null;
     }
     
 }

@@ -4,10 +4,13 @@
  */
 package hundreddays.model.Interfaces;
 
+import hundreddays.model.Hitbox;
+
 /**
  *
  * @author TAU
  */
 public interface Collidable {
-    boolean collidesWith(double[] hitbox); // placeholder for hitbox object
+    
+    public Hitbox getHitbox();
 }

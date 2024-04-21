@@ -5,6 +5,7 @@
 package hundreddays.model.GameObjects;
 
 import hundreddays.controllers.GameScreenController;
+import hundreddays.model.Hitbox;
 import hundreddays.model.Interfaces.Collidable;
 
 /**
@@ -42,14 +43,6 @@ public class Rock extends GameObject implements Collidable{
     }
 
     @Override
-    public boolean collidesWith(double[] h) {
-        return h[0] + h[2] >= this.xPos && h[0] <= this.xPos + this.width 
-                && h[1] + h[3] >= this.yPos && h[1] <= this.yPos + this.height;
-        
-        // placeholder for hitbox collision check
-    }
-
-    @Override
     public void initialize(GameScreenController controller) {
         return;
     }
@@ -57,6 +50,11 @@ public class Rock extends GameObject implements Collidable{
     @Override
     public void dispose(GameScreenController controller) {
         return;
+    }
+
+    @Override
+    public Hitbox getHitbox() {
+        return null;
     }
     
     
