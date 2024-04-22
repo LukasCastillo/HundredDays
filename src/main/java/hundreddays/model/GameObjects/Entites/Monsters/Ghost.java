@@ -17,21 +17,21 @@ public class Ghost extends Monster{
     }
 
     @Override
-    public void walk() {
+    public void walk(double deltaTime) {
         return;
     }
 
     @Override
-    public void attack() {
+    public void attack(double deltaTime) {
         return;
     }
 
     @Override
     public void update(double deltaTime) {
         if(true){ //player nearby
-            attack();
+            attack(deltaTime);
         }else{
-            walk();
+            walk(deltaTime);
         }
     }
 

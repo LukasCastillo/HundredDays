@@ -11,6 +11,7 @@ import hundreddays.handlers.MapHandler;
 import hundreddays.handlers.PlayerHandler;
 import hundreddays.model.Character;
 import hundreddays.model.GameObjects.Entites.Entity;
+import hundreddays.model.GameObjects.Entites.Monsters.Zombie;
 import hundreddays.model.GameObjects.GameObject;
 import hundreddays.model.GameObjects.Tree;
 import java.util.ArrayList;
@@ -52,9 +53,13 @@ public class Game {
         objectsToAdd = new ArrayList();
         objectsToDelete = new ArrayList();
         
+        Random random = new Random();
         for(int i = 0; i < 300; i++){
-            Random random = new Random();
             addGameObject(new Tree(random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, 1));
+        }
+        
+        for(int i = 0; i < 300; i++){
+            this.addGameObject(new Zombie(random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16));
         }
     }
     

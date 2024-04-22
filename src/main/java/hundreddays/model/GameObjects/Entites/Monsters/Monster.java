@@ -22,8 +22,8 @@ public abstract class Monster extends Entity {
         this.baseDefence = bDef;
     }
     
-    public abstract void walk();
-    public abstract void attack();
+    public abstract void walk(double deltaTime);
+    public abstract void attack(double deltaTime);
 
     /**
      * @return the drops
