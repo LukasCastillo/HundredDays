@@ -37,7 +37,7 @@ public class PlayerHandler {
     private int frameNo = 0;
     
     public static final double ACCELERATION = 20;
-    public static final double MAX_VELOCITY = 100;
+    public static final double MAX_VELOCITY = 300;
     
     public PlayerHandler(Character player){
         this.player = player;

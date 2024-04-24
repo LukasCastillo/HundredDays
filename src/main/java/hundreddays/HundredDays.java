@@ -11,6 +11,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import hundreddays.model.GameObjects.Entites.Monsters.Zombie;
 
 import java.io.IOException;
 import javafx.scene.layout.Pane;

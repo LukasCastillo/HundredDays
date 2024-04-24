@@ -61,9 +61,9 @@ public class HundredDays {
         player.setYPos(0);
         Zombie zombie = new Zombie(5, 5);
         
-        zombie.walk();
+        zombie.walk(0);
         player.moveBy(4, 4);
-        zombie.attack();
+        zombie.attack(0);
         player.setSelectedItem(sword);
         while(player.getHp() > 0 && zombie.getHp() > 0){
             player.onAttack(zombie.getBaseAttack());

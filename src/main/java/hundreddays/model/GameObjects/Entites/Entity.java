@@ -37,5 +37,13 @@ public abstract class Entity extends GameObject{
         return hp;
     }
     
+    public void moveBy(double dX, double dY){
+        this.xPos += dX;
+        this.yPos += dY;
+    }
     
+    public void setPosition(double x, double y){
+        this.xPos = x;
+        this.yPos = y;
+    }
 }
