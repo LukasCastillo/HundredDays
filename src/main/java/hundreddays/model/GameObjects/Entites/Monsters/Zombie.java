@@ -70,6 +70,7 @@ public class Zombie extends Monster{
                 }else{
                     if(!(go instanceof Zombie)) continue;
                     Zombie z = (Zombie) go;
+                    if(z == this) continue;
                     if(!z.hitbox.intersects(hitbox)) continue;
                     hitbox.pushOut(z.hitbox);
                     this.setPosition(hitbox.getCenterX(), hitbox.getCenterY());

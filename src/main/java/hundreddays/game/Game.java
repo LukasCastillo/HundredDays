@@ -37,7 +37,7 @@ public class Game {
     public static final float GAME_DAY = 120; // in seconds
     private float gameSeconds = 0;
     
-    AnimationTimer gameTimer;
+    private AnimationTimer gameTimer;
     private double prevUpdateTime = 0;
     public static final double UPDATE_PERIOD = 16.7; // in milliseconds
     private GameScreenController controller;
