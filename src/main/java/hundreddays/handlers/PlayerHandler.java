@@ -28,6 +28,7 @@ public class PlayerHandler {
     private int direction = 0; //0 - up, 1 - left, 2 - down, 3 - right
     private ImageView playerView;
     private Hitbox hitbox;
+    private boolean attacking = false;
     
     private final int IMAGE_WIDTH = 48;
     private final int IMAGE_HEIGHT = 48;
@@ -144,6 +145,13 @@ public class PlayerHandler {
         HundredDays.getGame().getCamera().renderHitbox(hitbox);
         if(direction == 1) playerView.scaleXProperty().set(-Math.abs(playerView.scaleXProperty().get()));
         playerView.setViewOrder(-player.getYPos());
+        
+        controller.getHealthBar().setProgress(player.getHp() / player.getMaxHp());
+        controller.getHungerBar().setProgress(player.getHunger() / player.getMaxHunger());
+    }
+    
+    public void setAttacking(){
+        attacking = true;
     }
     
     public Character getPlayer(){
@@ -157,5 +165,9 @@ public class PlayerHandler {
     public void moveBy(double dX, double dY){
         player.moveBy(dX, dY);
         hitbox.setPosition(player.getXPos(), player.getYPos() + 10);
+    }
+    
+    public double distanceTo(double x, double y){
+        return Math.sqrt(Math.pow(player.getXPos() - x, 2) + Math.pow(player.getYPos() - y, 2));
     }
 }

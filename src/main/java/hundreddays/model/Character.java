@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Character {
     private String name;
     private double hp, hunger;
-    private double maxHp, maxHunger;
+    private final double maxHp, maxHunger;
     private double baseAttack, baseDefence;
     private String role;
     private ArrayList<Item> items;
@@ -51,7 +51,7 @@ public class Character {
     public void useItem(){
         if(this.selectedItem instanceof Food){
             this.hunger += ((Food) this.selectedItem).getFoodPoints();
-            if(this.hunger > this.maxHunger) this.hunger = this.maxHunger;
+            if(this.hunger > this.getMaxHunger()) this.hunger = this.getMaxHunger();
             
             ((Food) this.selectedItem).addCount(1);
         }
@@ -185,6 +185,20 @@ public class Character {
     public void setPosition(double x, double y){
         this.xPos = x;
         this.yPos = y;
+    }
+
+    /**
+     * @return the maxHp
+     */
+    public double getMaxHp() {
+        return maxHp;
+    }
+
+    /**
+     * @return the maxHunger
+     */
+    public double getMaxHunger() {
+        return maxHunger;
     }
     
 }

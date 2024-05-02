@@ -9,6 +9,7 @@ import hundreddays.model.GameObjects.GameObject;
 import hundreddays.model.Hitbox;
 import hundreddays.model.Interfaces.Collidable;
 import hundreddays.model.Items.Item;
+import java.util.Date;
 import java.util.Random;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,9 +20,13 @@ import javafx.scene.image.ImageView;
  */
 public class Zombie extends Monster{
     
+    public final static double ATTACK_COOLDOWN = 1;
+    
     private ImageView zombieView;
-    public Hitbox hitbox;
+    private Hitbox hitbox;
     private Random random;
+    
+    private double lastAttackTime = 0;
 
     public Zombie(double x, double y) {
         super(x, y, "zombie-texture", 90, 80, 
@@ -38,8 +43,12 @@ public class Zombie extends Monster{
 
     @Override
     public void attack(double deltaTime) {
-        if(false){// player within attack range
+        if(HundredDays.getGame().getPlayerHandler().distanceTo(this.xPos, this.yPos) < 10){// player within attack range
             //plater.onAttack(baseAttack)
+            if((new Date().getTime())/1000 - lastAttackTime < ATTACK_COOLDOWN) return;
+            System.out.println("NEAR!!!!!");
+            HundredDays.getGame().getPlayerHandler().getPlayer().onAttack(baseAttack);
+            lastAttackTime = (new Date().getTime())/1000;
         }else{
             double dX = HundredDays.getGame().getPlayerHandler().getPlayer().getXPos() - xPos;
             double dY = HundredDays.getGame().getPlayerHandler().getPlayer().getYPos() - yPos;

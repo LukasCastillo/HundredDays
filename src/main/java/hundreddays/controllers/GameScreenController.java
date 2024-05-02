@@ -16,10 +16,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -43,6 +46,9 @@ public class GameScreenController implements Initializable {
     @FXML Pane objectsPane;
     @FXML Pane dayPane;
     @FXML StackPane rootPane;
+    
+    @FXML private ProgressBar healthBar;
+    @FXML private ProgressBar hungerBar;
 
     @FXML private void pauseAction(){
         System.out.println("Open Settings!!");
@@ -127,6 +133,11 @@ public class GameScreenController implements Initializable {
             }
         });
         
+        HundredDays.getStage().getScene().addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent m) -> {
+            if(m.getButton() != MouseButton.PRIMARY) return;
+            HundredDays.getGame().getPlayerHandler().setAttacking();
+        });
+        
         rootPane.widthProperty().addListener((ObservableValue<? extends Number> ov, Number oldWidth, Number newWidth) -> {
             HundredDays.getGame().getCamera().setViewW(newWidth.doubleValue());
         });
@@ -160,5 +171,19 @@ public class GameScreenController implements Initializable {
     
     public Pane getDayPane(){
         return dayPane;
+    }
+
+    /**
+     * @return the healthBar
+     */
+    public ProgressBar getHealthBar() {
+        return healthBar;
+    }
+
+    /**
+     * @return the hungerBar
+     */
+    public ProgressBar getHungerBar() {
+        return hungerBar;
     }
 }
