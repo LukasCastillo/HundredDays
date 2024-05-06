@@ -36,6 +36,7 @@ public class PlayerHandler {
     private final double FRAME_TIME = 0.20;
     private final int FRAMES = 6;
     private int frameNo = 0;
+    private int attackCount = 0;
     
     public static final double ACCELERATION = 20;
     public static final double MAX_VELOCITY = 300;
@@ -121,6 +122,18 @@ public class PlayerHandler {
         
         HundredDays.getGame().getCamera().setCenterX(player.getXPos());
         HundredDays.getGame().getCamera().setCenterY(player.getYPos());
+        
+        if(this.attacking){
+            System.out.println("ATTACKÏNG");
+            attackCount += 1;
+            this.attacking = false;
+            for(GameObject go : HundredDays.getGame().getGameObjects()){
+                if(this.distanceTo(go.getXPos(), go.getYPos()) > 40) continue;
+                if(!this.facingTowards(go.getXPos(), go.getYPos()) && this.distanceTo(go.getXPos(), go.getYPos()) > 20) continue;
+                System.out.println("Attacking: " + go);
+                go.onAttack(player.getBaseAttack());
+            }
+        }
     }
     
     public void render(GameScreenController controller, double deltaT){
@@ -169,5 +182,21 @@ public class PlayerHandler {
     
     public double distanceTo(double x, double y){
         return Math.sqrt(Math.pow(player.getXPos() - x, 2) + Math.pow(player.getYPos() - y, 2));
+    }
+    
+    public boolean facingTowards(double x, double y){
+        switch (this.direction) {
+            case 0:
+                return y <= player.getYPos();
+            case 1:
+                return x <= player.getXPos();
+            case 2:
+                return y >= player.getYPos();
+            case 3:
+                return x >= player.getXPos();
+            default:
+                break;
+        }
+        return false;
     }
 }

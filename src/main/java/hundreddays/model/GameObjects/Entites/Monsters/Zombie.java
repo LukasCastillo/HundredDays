@@ -11,8 +11,14 @@ import hundreddays.model.Interfaces.Collidable;
 import hundreddays.model.Items.Item;
 import java.util.Date;
 import java.util.Random;
+import javafx.animation.FillTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 /**
  *
@@ -29,7 +35,7 @@ public class Zombie extends Monster{
     private double lastAttackTime = 0;
 
     public Zombie(double x, double y) {
-        super(x, y, "zombie-texture", 90, 80, 
+        super(x, y, "zombie-texture", 30, 80, 
                 new Item[] {new Item("Rotten Meat", 2), new Item("Bones")}, 20, 30);
         zombieView = new ImageView(new Image(HundredDays.class.getResource("monsters/zombie.png").toString()));
         hitbox = new Hitbox(0, 0, 10, 20);
@@ -107,6 +113,9 @@ public class Zombie extends Monster{
     @Override
     public void onAttack(double damage) {
         this.hp -= damage * (1 - this.baseDefence / 1000);
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue()));
+        System.out.println("Help!!: " + this.hp);
+        if(this.hp <= 0) HundredDays.getGame().deleteGameObject(this);
     }
 
     @Override
@@ -127,7 +136,8 @@ public class Zombie extends Monster{
 
     @Override
     public void dispose(GameScreenController controller) {
-        return;
+        controller.getObjectsPane().getChildren().remove(zombieView);
+        controller.getObjectsPane().getChildren().remove(hitbox.getRect());
     }
     
 }

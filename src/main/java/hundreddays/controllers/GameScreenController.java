@@ -23,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -45,13 +46,17 @@ public class GameScreenController implements Initializable {
     @FXML Pane bgPane;
     @FXML Pane objectsPane;
     @FXML Pane dayPane;
+    @FXML private Pane deathPane;
+    @FXML private BorderPane HUDPane;
+    
     @FXML StackPane rootPane;
     
     @FXML private ProgressBar healthBar;
     @FXML private ProgressBar hungerBar;
 
     @FXML private void pauseAction(){
-        System.out.println("Open Settings!!");
+        System.out.println("Paused Game");
+        HundredDays.getGame().pause();
         Alert alert = new Alert(AlertType.NONE);
         alert.setTitle("Game Paused");
         alert.setHeaderText("Choose an option:");
@@ -67,7 +72,7 @@ public class GameScreenController implements Initializable {
         
         System.out.println("User selected: " + alert.getResult().getText());
         if(alert.getResult() == continueButton){
-            
+            HundredDays.getGame().unpause();
         }
         else if(alert.getResult() == settingsButton){
             try {
@@ -107,6 +112,13 @@ public class GameScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        //disable and enable panes
+        deathPane.setVisible(false);
+        deathPane.setDisable(true);
+        
+        HUDPane.setVisible(true);
+        HUDPane.setDisable(false);
         
         //on window key down
         HundredDays.getStage().addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent key) -> {
@@ -151,6 +163,7 @@ public class GameScreenController implements Initializable {
         
         //start game
         HundredDays.getGame().start(this);
+        HundredDays.getGame().unpause();
     }
     
     public ImageView getBgImage(){
@@ -185,5 +198,19 @@ public class GameScreenController implements Initializable {
      */
     public ProgressBar getHungerBar() {
         return hungerBar;
+    }
+
+    /**
+     * @return the deathPane
+     */
+    public Pane getDeathPane() {
+        return deathPane;
+    }
+
+    /**
+     * @return the HUDPane
+     */
+    public BorderPane getHUDPane() {
+        return HUDPane;
     }
 }

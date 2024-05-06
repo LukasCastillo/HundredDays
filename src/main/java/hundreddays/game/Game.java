@@ -42,6 +42,7 @@ public class Game {
     public static final double UPDATE_PERIOD = 16.7; // in milliseconds
     private GameScreenController controller;
     private double deltaTime = 0;
+    private boolean paused = false;
     
     public Game(){
         playerHandler = new PlayerHandler(new Character("Lukas", 100, 100, 20, 10, "Swordsman", 0, 0));
@@ -96,6 +97,7 @@ public class Game {
     }
     
     public void update(){
+        if(paused) return;
         System.out.println("Updating!");
         
         //update time
@@ -125,6 +127,9 @@ public class Game {
             if(!(go instanceof Entity)) continue;
                 ((Entity) go).update(getDeltaTime());
         }
+        
+        
+        
     }
     
     public void render(){
@@ -224,5 +229,13 @@ public class Game {
      */
     public ArrayList<GameObject> getGameObjects() {
         return gameObjects;
+    }
+    
+    public void pause(){
+        paused = true;
+    }
+    
+    public void unpause(){
+        paused = false;
     }
 }
