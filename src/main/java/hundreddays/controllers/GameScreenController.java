@@ -42,6 +42,7 @@ public class GameScreenController implements Initializable {
     @FXML ImageView bgImage;
     @FXML Label debugLabel;
     @FXML Label dayLabel;
+    @FXML private Label deathDaysLabel;
     
     @FXML Pane bgPane;
     @FXML Pane objectsPane;
@@ -95,6 +96,18 @@ public class GameScreenController implements Initializable {
                 System.exit(1);
             }
         }
+    }
+    
+    @FXML private void deathExitGame(){
+        try {
+                //delete current world
+                HundredDays.newGame();
+                HundredDays.setScreen("HomeScreen");
+            } catch (IOException ex) {
+                System.out.println("Failed to load stage HomeScreen.fxml");
+                System.out.println(ex.getMessage());
+                System.exit(1);
+            }
     }
     
     @FXML private void settingsMouseEntered(){
@@ -212,5 +225,12 @@ public class GameScreenController implements Initializable {
      */
     public BorderPane getHUDPane() {
         return HUDPane;
+    }
+
+    /**
+     * @return the deathDaysLabel
+     */
+    public Label getDeathDaysLabel() {
+        return deathDaysLabel;
     }
 }

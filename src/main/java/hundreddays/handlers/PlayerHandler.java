@@ -134,6 +134,18 @@ public class PlayerHandler {
                 go.onAttack(player.getBaseAttack());
             }
         }
+        
+        
+        
+        //check player health
+        if(player.getHp() <= 0){
+            GameScreenController controller = (GameScreenController) HundredDays.getController();
+            controller.getHUDPane().setDisable(true);
+            controller.getDeathPane().setDisable(false);
+            controller.getDeathPane().setVisible(true);
+            controller.getDeathDaysLabel().setText("Days Survived: " + HundredDays.getGame().getGameDay());
+            HundredDays.getGame().close();
+        }
     }
     
     public void render(GameScreenController controller, double deltaT){

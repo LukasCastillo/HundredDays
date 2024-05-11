@@ -132,5 +132,9 @@ public class HundredDays extends Application {
         HundredDays.saveOptions();
         HundredDays.getGame().close();
     }
+    
+    public static void newGame(){
+        game = new Game();
+    }
 
 }

@@ -47,6 +47,16 @@ public class HomeScreenController implements Initializable {
         }
     }
     
+    @FXML private void openAbout(){
+        try {
+            HundredDays.setScreen("AboutScreen");
+        } catch (IOException ex) {
+            System.out.println("Failed to load stage AboutScreen.fxml");
+            System.out.println(ex.getMessage());
+            System.exit(1);
+        }
+    }
+    
     @FXML private void exitGame(ActionEvent ae){
         System.out.println("Exiting");
         HundredDays.getStage().close();
