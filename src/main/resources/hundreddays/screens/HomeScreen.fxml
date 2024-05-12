@@ -5,10 +5,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hundreddays.controllers.HomeScreenController">
    <children>
@@ -42,11 +42,15 @@
       </BorderPane>
       <BorderPane focusTraversable="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0">
          <bottom>
-            <Button mnemonicParsing="false" onAction="#openAbout" text="About" BorderPane.alignment="BOTTOM_LEFT">
-               <BorderPane.margin>
+            <HBox spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#openAbout" text="About" />
+                  <Button fx:id="loreButton" mnemonicParsing="false" onAction="#openLore" text="Lore" />
+               </children>
+               <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </BorderPane.margin>
-            </Button>
+               </padding>
+            </HBox>
          </bottom>
       </BorderPane>
    </children>

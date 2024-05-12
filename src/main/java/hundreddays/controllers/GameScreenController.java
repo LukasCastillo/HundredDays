@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -26,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -54,6 +56,11 @@ public class GameScreenController implements Initializable {
     
     @FXML private ProgressBar healthBar;
     @FXML private ProgressBar hungerBar;
+    
+    @FXML private VBox notificationPane;
+    @FXML private Label notificationHeader;
+    @FXML private Label notificaitonContent;
+    @FXML private Button notificationButton;
 
     @FXML private void pauseAction(){
         System.out.println("Paused Game");
@@ -116,6 +123,10 @@ public class GameScreenController implements Initializable {
     
     @FXML private void settingsMouseExited(){
         pauseButton.setImage(pauseImage);
+    }
+    
+    @FXML private void exitNotification(){
+        HundredDays.getGame().getNotificationHandler().exitNotification();
     }
     
     /**
@@ -232,5 +243,26 @@ public class GameScreenController implements Initializable {
      */
     public Label getDeathDaysLabel() {
         return deathDaysLabel;
+    }
+
+    /**
+     * @return the notificationPane
+     */
+    public VBox getNotificationPane() {
+        return notificationPane;
+    }
+
+    /**
+     * @return the notificationHeader
+     */
+    public Label getNotificationHeader() {
+        return notificationHeader;
+    }
+
+    /**
+     * @return the notificaitonContent
+     */
+    public Label getNotificaitonContent() {
+        return notificaitonContent;
     }
 }

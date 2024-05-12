@@ -8,6 +8,7 @@ import hundreddays.controllers.GameScreenController;
 import hundreddays.handlers.Camera;
 import hundreddays.handlers.DebugHandler;
 import hundreddays.handlers.MapHandler;
+import hundreddays.handlers.NotificationHandler;
 import hundreddays.handlers.PlayerHandler;
 import hundreddays.model.Character;
 import hundreddays.model.GameObjects.Entites.Entity;
@@ -24,11 +25,19 @@ import javafx.animation.AnimationTimer;
  * @author TAU
  */
 public class Game {
+
+    /**
+     * @return the notificationHandler
+     */
+    public NotificationHandler getNotificationHandler() {
+        return notificationHandler;
+    }
     private PlayerHandler playerHandler;
     
     private MapHandler mapHandler = new MapHandler();
     private Camera camera;
     private DebugHandler debugHandler = new DebugHandler();
+    private NotificationHandler notificationHandler = new NotificationHandler();
     
     private ArrayList<GameObject> gameObjects;
     private ArrayList<GameObject> objectsToAdd;
@@ -93,6 +102,7 @@ public class Game {
         gameTimer.start();
         playerHandler.initialize(controller);
         mapHandler.initialize(controller.getBgImage());
+        notificationHandler.initialize(controller);
         for(GameObject go : gameObjects) go.initialize(controller);
     }
     
@@ -163,6 +173,8 @@ public class Game {
         debugHandler.addDebug("Mem", String.format("%dMB/%dMB", allocatedMemory / 1000000, Runtime.getRuntime().maxMemory() / 1000000));
         debugHandler.addDebug("sec", this.getGameSeconds());
         debugHandler.render(controller.getDebugLabel());
+        
+        notificationHandler.render(controller, deltaTime);
     }
     
     public void close(){

@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
@@ -109,13 +108,6 @@
                </right>
             </BorderPane>
          </top>
-         <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="debugLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="5.0" prefHeight="251.0" prefWidth="202.0" />
-               </children>
-            </AnchorPane>
-         </center>
          <bottom>
             <VBox prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
@@ -140,8 +132,46 @@
                </BorderPane.margin>
             </VBox>
          </bottom>
+         <right>
+            <VBox prefHeight="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="notificationPane" alignment="CENTER" fillWidth="false" style="-fx-background-color: beige;">
+                     <children>
+                        <BorderPane>
+                           <left>
+                              <Button fx:id="notificationButton" mnemonicParsing="false" onAction="#exitNotification" prefHeight="2.0" prefWidth="7.0" text="X" BorderPane.alignment="CENTER" />
+                           </left>
+                           <center>
+                              <Label fx:id="notificationHeader" text="Notification" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </BorderPane.margin>
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                           </center>
+                        </BorderPane>
+                        <Label fx:id="notificaitonContent" text="Information" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </children>
+            </VBox>
+         </right>
+         <left>
+            <Label fx:id="debugLabel" alignment="TOP_LEFT" prefHeight="193.0" prefWidth="148.0" wrapText="true" BorderPane.alignment="TOP_LEFT" />
+         </left>
       </BorderPane>
-      <BorderPane fx:id="deathPane" prefHeight="200.0" prefWidth="200.0">
+      <BorderPane fx:id="deathPane" disable="true" prefHeight="200.0" prefWidth="200.0" visible="false">
          <center>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-background-color: rgba(1,1,1,0.7);" BorderPane.alignment="CENTER">
                <children>

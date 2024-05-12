@@ -8,6 +8,7 @@ import hundreddays.HundredDays;
 import hundreddays.controllers.GameScreenController;
 import hundreddays.enums.KeyAction;
 import hundreddays.model.Character;
+import hundreddays.model.GameObjects.Entites.Monsters.Monster;
 import hundreddays.model.GameObjects.GameObject;
 import hundreddays.model.Hitbox;
 import hundreddays.model.Interfaces.Collidable;
@@ -37,6 +38,10 @@ public class PlayerHandler {
     private final int FRAMES = 6;
     private int frameNo = 0;
     private int attackCount = 0;
+    
+    //flags for notification
+    private boolean notificationNearMonster = false;
+    private boolean notificationMovementControls = false;
     
     public static final double ACCELERATION = 20;
     public static final double MAX_VELOCITY = 300;
@@ -146,6 +151,8 @@ public class PlayerHandler {
             controller.getDeathDaysLabel().setText("Days Survived: " + HundredDays.getGame().getGameDay());
             HundredDays.getGame().close();
         }
+        
+        updateNotifications();
     }
     
     public void render(GameScreenController controller, double deltaT){
@@ -174,6 +181,34 @@ public class PlayerHandler {
         controller.getHealthBar().setProgress(player.getHp() / player.getMaxHp());
         controller.getHungerBar().setProgress(player.getHunger() / player.getMaxHunger());
     }
+    
+    
+    private void updateNotifications(){
+        if(!notificationNearMonster){
+            for(GameObject go : HundredDays.getGame().getGameObjects()){
+                if(this.distanceTo(go.getXPos(), go.getYPos()) > 50) continue;
+                if(!(go instanceof Monster)) continue;
+                notificationNearMonster = true;
+                HundredDays.getGame().getNotificationHandler().addNotificaiton(new Notification("Tutorial", "Use left click to attack!"));
+                break;
+            }
+        }
+        
+        if(!notificationMovementControls){
+            String keybinds = "";
+            keybinds += HundredDays.getOptions().getKeyBind(KeyAction.MOVE_UP).getChar();
+            keybinds += HundredDays.getOptions().getKeyBind(KeyAction.MOVE_LEFT).getChar();
+            keybinds += HundredDays.getOptions().getKeyBind(KeyAction.MOVE_DOWN).getChar();
+            keybinds += HundredDays.getOptions().getKeyBind(KeyAction.MOVE_RIGHT).getChar();
+            Notification notif = new Notification("Tutorial", "Use " + keybinds + " keys to move!");
+            
+            HundredDays.getGame().getNotificationHandler().addNotificaiton(notif);
+            notificationMovementControls = true;
+        }
+    }
+    
+    
+    
     
     public void setAttacking(){
         attacking = true;
