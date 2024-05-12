@@ -57,6 +57,16 @@ public class HomeScreenController implements Initializable {
         }
     }
     
+    @FXML private void openLore(){
+        try {
+            HundredDays.setScreen("LoreScreen");
+        } catch (IOException ex) {
+            System.out.println("Failed to load stage LoreScreen.fxml");
+            System.out.println(ex.getMessage());
+            System.exit(1);
+        }
+    }
+    
     @FXML private void exitGame(ActionEvent ae){
         System.out.println("Exiting");
         HundredDays.getStage().close();
