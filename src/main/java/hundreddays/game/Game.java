@@ -64,11 +64,7 @@ public class Game {
         objectsToDelete = new ArrayList();
         
         Random random = new Random();
-        for(int i = 0; i < 300; i++){
-            addGameObject(new Tree(random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, 1));
-        }
-        
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < 5; i++){
             this.addGameObject(new Zombie(random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16));
         }
     }
