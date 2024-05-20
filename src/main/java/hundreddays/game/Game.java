@@ -8,6 +8,7 @@ import hundreddays.controllers.GameScreenController;
 import hundreddays.handlers.Camera;
 import hundreddays.handlers.DebugHandler;
 import hundreddays.handlers.MapHandler;
+import hundreddays.handlers.MobHandler;
 import hundreddays.handlers.NotificationHandler;
 import hundreddays.handlers.PlayerHandler;
 import hundreddays.model.Character;
@@ -38,6 +39,7 @@ public class Game {
     private Camera camera;
     private DebugHandler debugHandler = new DebugHandler();
     private NotificationHandler notificationHandler = new NotificationHandler();
+    private MobHandler mobHandler = new MobHandler();
     
     private ArrayList<GameObject> gameObjects;
     private ArrayList<GameObject> objectsToAdd;
@@ -62,11 +64,6 @@ public class Game {
         gameObjects = new ArrayList();
         objectsToAdd = new ArrayList();
         objectsToDelete = new ArrayList();
-        
-        Random random = new Random();
-        for(int i = 0; i < 5; i++){
-            this.addGameObject(new Zombie(random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16, random.nextInt((int) (MapHandler.MAP_SIZE / 16)) * 16));
-        }
     }
     
     public void start(GameScreenController controller){
@@ -112,6 +109,9 @@ public class Game {
         //update player
         playerHandler.update(getDeltaTime());
         
+        //mod spawning
+        mobHandler.update(getDeltaTime());
+        
         //add game objects
         for(GameObject go : this.objectsToAdd){
             this.getGameObjects().add(go);
@@ -148,7 +148,7 @@ public class Game {
         
         //day
         //made funny equation in desmos
-        double dayOpacity = 0.5 * Math.max(0, -(10 / (0.625 * Math.pow(GAME_DAY, 2))) * (Math.pow(this.getGameTime() - GAME_DAY / 2, 2) - Math.pow(GAME_DAY / 4, 2)));
+        double dayOpacity = 0.7 * Math.max(0, -(10 / (0.625 * Math.pow(GAME_DAY, 2))) * (Math.pow(this.getGameTime() - GAME_DAY / 2, 2) - Math.pow(GAME_DAY / 4, 2)));
         controller.getDayPane().setOpacity(dayOpacity);
         
         //render player
@@ -168,6 +168,7 @@ public class Game {
         debugHandler.addDebug("FPS", (1 / getDeltaTime()));
         debugHandler.addDebug("Mem", String.format("%dMB/%dMB", allocatedMemory / 1000000, Runtime.getRuntime().maxMemory() / 1000000));
         debugHandler.addDebug("sec", this.getGameSeconds());
+        debugHandler.addDebug("time", this.isNight());
         debugHandler.render(controller.getDebugLabel());
         
         notificationHandler.render(controller, deltaTime);
@@ -205,6 +206,10 @@ public class Game {
     
     public float getGameTime(){
         return gameSeconds % GAME_DAY;
+    }
+    
+    public boolean isNight(){
+        return getGameTime() > GAME_DAY / 4 && getGameTime() < GAME_DAY * 3 / 4;
     }
     
     public int getGameDay(){

@@ -44,7 +44,7 @@ public class PlayerHandler {
     private boolean notificationMovementControls = false;
     
     public static final double ACCELERATION = 20;
-    public static final double MAX_VELOCITY = 300;
+    public static final double MAX_VELOCITY = 100;
     
     public PlayerHandler(Character player){
         this.player = player;

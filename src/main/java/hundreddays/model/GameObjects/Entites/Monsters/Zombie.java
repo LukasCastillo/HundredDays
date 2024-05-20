@@ -11,14 +11,8 @@ import hundreddays.model.Interfaces.Collidable;
 import hundreddays.model.Items.Item;
 import java.util.Date;
 import java.util.Random;
-import javafx.animation.FillTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
 
 /**
  *
@@ -27,12 +21,14 @@ import javafx.util.Duration;
 public class Zombie extends Monster{
     
     public final static double ATTACK_COOLDOWN = 1;
+    public final static double FIRE_COOLDOWN = 1;
     
     private ImageView zombieView;
     private Hitbox hitbox;
     private Random random;
     
     private double lastAttackTime = 0;
+    private double lastFireTime = 0;
 
     public Zombie(double x, double y) {
         super(x, y, "zombie-texture", 30, 80, 
@@ -44,7 +40,7 @@ public class Zombie extends Monster{
 
     @Override
     public void walk(double deltaTime) {
-        //move randomrly
+        
     }
 
     @Override
@@ -73,12 +69,6 @@ public class Zombie extends Monster{
             hitbox.setPosition(xPos, yPos);
             
             for(GameObject go : HundredDays.getGame().getGameObjects()){
-//                if(!(go instanceof Collidable)) continue;
-//                Collidable co = (Collidable) go;
-//                if(!co.getHitbox().intersects(hitbox)) continue;
-//                hitbox.pushOut(co.getHitbox());
-//                this.setPosition(hitbox.getCenterX(), hitbox.getCenterY());
-                
                 if(go instanceof Collidable && ((Collidable) go).getHitbox().intersects(hitbox)){
                     hitbox.pushOut(((Collidable) go).getHitbox());
                     this.setPosition(hitbox.getCenterX(), hitbox.getCenterY());
@@ -97,7 +87,16 @@ public class Zombie extends Monster{
 
     @Override
     public void update(double deltaTime) {
-        if(true){ //player nearby
+        if(!HundredDays.getGame().isNight()){
+            lastFireTime += deltaTime;
+            if(lastFireTime >= FIRE_COOLDOWN){
+                lastFireTime = 0;
+                onAttack(10);
+            }
+        }
+        
+        
+        if(HundredDays.getGame().getPlayerHandler().distanceTo(this.xPos, this.yPos) < 800 || true){
             attack(deltaTime);
         }else{
             walk(deltaTime);
