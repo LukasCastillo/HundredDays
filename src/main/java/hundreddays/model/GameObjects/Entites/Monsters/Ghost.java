@@ -13,7 +13,7 @@ import hundreddays.model.Items.Item;
 public class Ghost extends Monster{
 
     public Ghost(double x, double y, String texture) {
-        super(x, y, "ghost-texture", 50, 90, new Item[] {}, 10, 60);
+        super(x, y, null, 50, 90, new Item[] {}, 10, 60);
     }
 
     @Override

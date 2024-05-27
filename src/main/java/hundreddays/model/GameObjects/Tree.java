@@ -36,19 +36,17 @@ public class Tree extends GameObject implements Collidable{
         }
     }
     
-    ImageView treeView;
     private final int height;
     private final TreeTypes type;
     private Hitbox hitbox;
 
     public Tree(double x, double y, int height, TreeTypes type) {
-        super(x, y, "tree-texture");
+        super(x, y, new ImageView(new Image(HundredDays.class.getResource("objects/trees/" + type.IMG_PATH).toString())));
         this.height = height;
         this.type = type;
         this.hitbox = type.hitbox.copy();
         
-        treeView = new ImageView(new Image(HundredDays.class.getResource("objects/trees/" + type.IMG_PATH).toString()));
-        treeView.smoothProperty().set(false);
+        this.texture.smoothProperty().set(false);
     }
     
     //generate random tree
@@ -58,8 +56,8 @@ public class Tree extends GameObject implements Collidable{
 
     @Override
     public void render(GameScreenController controller) {
-        HundredDays.getGame().getCamera().renderImage(treeView, xPos, yPos);
-        treeView.setViewOrder(-yPos);
+        HundredDays.getGame().getCamera().renderImage(this.texture, xPos, yPos);
+        texture.setViewOrder(-yPos);
         
         hitbox.setPosition(xPos + type.xHOff, yPos + type.yHOff);
         HundredDays.getGame().getCamera().renderHitbox(hitbox);
@@ -88,14 +86,14 @@ public class Tree extends GameObject implements Collidable{
 
     @Override
     public void initialize(GameScreenController controller) {
-        controller.getObjectsPane().getChildren().add(treeView);
+        controller.getObjectsPane().getChildren().add(texture);
         controller.getObjectsPane().getChildren().add(hitbox.getRect());
         System.out.println("Initlized treee");
     }
 
     @Override
     public void dispose(GameScreenController controller) {
-        controller.getObjectsPane().getChildren().remove(treeView);
+        controller.getObjectsPane().getChildren().remove(texture);
         System.out.println("Initlized treee");
     }
     

@@ -5,6 +5,7 @@
 package hundreddays.model.GameObjects;
 
 import hundreddays.controllers.GameScreenController;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -13,9 +14,9 @@ import hundreddays.controllers.GameScreenController;
 public abstract class GameObject {
     protected double xPos;
     protected double yPos;
-    protected String texture; // placeholder for texture object
+    protected ImageView texture;
     
-    public GameObject(double x, double y, String texture){
+    public GameObject(double x, double y, ImageView texture){
         this.xPos = x;
         this.yPos = y;
         this.texture = texture;

@@ -5,6 +5,7 @@ package hundreddays.model.GameObjects.Entites.Monsters;
 
 import hundreddays.model.GameObjects.Entites.Entity;
 import hundreddays.model.Items.Item;
+import javafx.scene.image.ImageView;
 
 /**
  *
@@ -15,7 +16,7 @@ public abstract class Monster extends Entity {
     protected double baseAttack;
     protected double baseDefence;
     
-    public Monster(double x, double y, String texture, double speed, int hp, Item[] drops, double bAtk, double bDef) {
+    public Monster(double x, double y, ImageView texture, double speed, int hp, Item[] drops, double bAtk, double bDef) {
         super(x, y, texture, speed, hp);
         this.drops = drops;
         this.baseAttack = bAtk;

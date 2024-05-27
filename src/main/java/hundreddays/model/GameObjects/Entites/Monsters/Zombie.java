@@ -23,7 +23,6 @@ public class Zombie extends Monster{
     public final static double ATTACK_COOLDOWN = 1;
     public final static double FIRE_COOLDOWN = 1;
     
-    private ImageView zombieView;
     private Hitbox hitbox;
     private Random random;
     
@@ -31,9 +30,8 @@ public class Zombie extends Monster{
     private double lastFireTime = 0;
 
     public Zombie(double x, double y) {
-        super(x, y, "zombie-texture", 30, 80, 
+        super(x, y, new ImageView(new Image(HundredDays.class.getResource("monsters/zombie.png").toString())), 30, 80, 
                 new Item[] {new Item("Rotten Meat", 2), new Item("Bones")}, 20, 30);
-        zombieView = new ImageView(new Image(HundredDays.class.getResource("monsters/zombie.png").toString()));
         hitbox = new Hitbox(0, 0, 10, 20);
         random = new Random();
     }
@@ -105,7 +103,7 @@ public class Zombie extends Monster{
 
     @Override
     public void render(GameScreenController controller) {
-        HundredDays.getGame().getCamera().renderImage(zombieView, xPos, yPos);
+        HundredDays.getGame().getCamera().renderImage(this.texture, xPos, yPos);
         HundredDays.getGame().getCamera().renderHitbox(hitbox);
     }
 
@@ -129,13 +127,13 @@ public class Zombie extends Monster{
 
     @Override
     public void initialize(GameScreenController controller) {
-        controller.getObjectsPane().getChildren().add(zombieView);
+        controller.getObjectsPane().getChildren().add(this.texture);
         controller.getObjectsPane().getChildren().add(hitbox.getRect());
     }
 
     @Override
     public void dispose(GameScreenController controller) {
-        controller.getObjectsPane().getChildren().remove(zombieView);
+        controller.getObjectsPane().getChildren().remove(this.texture);
         controller.getObjectsPane().getChildren().remove(hitbox.getRect());
     }
     

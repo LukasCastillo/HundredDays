@@ -17,7 +17,7 @@ public class Rock extends GameObject implements Collidable{
     private final int height, width;
 
     public Rock(double x, double y, int h, int w) {
-        super(x, y, "rock-texure");
+        super(x, y, null);
         this.height = h;
         this.width = w;
     }

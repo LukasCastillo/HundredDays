@@ -23,7 +23,7 @@ public class Base extends Entity implements Collidable{
     private int level;
     
     public Base(double x, double y, String name, double bAtk, double bDef, int regenSpeed, int capacity, int level) {
-        super(x, y, "base-texture", 0, 300);
+        super(x, y, null, 0, 300);
         
         this.name = name;
         this.baseAttack = bAtk;

@@ -5,6 +5,7 @@
 package hundreddays.model.GameObjects.Entites;
 
 import hundreddays.model.GameObjects.GameObject;
+import javafx.scene.image.ImageView;
 
 
 /**
@@ -15,7 +16,7 @@ public abstract class Entity extends GameObject{
     protected double speed;
     protected double hp;
     
-    public Entity(double x, double y, String texture, double speed, int hp) {
+    public Entity(double x, double y, ImageView texture, double speed, int hp) {
         super(x, y, texture);
         this.speed = speed;
         this.hp = hp;

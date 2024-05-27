@@ -12,7 +12,7 @@ import hundreddays.model.Items.Item;
  */
 public class Cow extends Animal{
     public Cow(double x, double y) {
-        super(x, y, "cow-texture", 20, 30, new Item[] {new Item("Beef")});
+        super(x, y, null, 20, 30, new Item[] {new Item("Beef")});
     }
 
     @Override
