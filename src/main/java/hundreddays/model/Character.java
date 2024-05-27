@@ -50,8 +50,8 @@ public class Character {
     
     public void useItem(){
         if(this.selectedItem instanceof Food){
-            this.hunger += ((Food) this.selectedItem).getFoodPoints();
-            if(this.hunger > this.getMaxHunger()) this.hunger = this.getMaxHunger();
+            this.setHunger(this.hunger + ((Food) this.selectedItem).getFoodPoints());
+            if(this.hunger > this.getMaxHunger()) this.setHunger(this.getMaxHunger());
             
             ((Food) this.selectedItem).addCount(1);
         }
@@ -199,6 +199,13 @@ public class Character {
      */
     public double getMaxHunger() {
         return maxHunger;
+    }
+
+    /**
+     * @param hunger the hunger to set
+     */
+    public void setHunger(double hunger) {
+        this.hunger = hunger;
     }
     
 }

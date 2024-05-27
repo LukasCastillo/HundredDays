@@ -43,6 +43,12 @@ public class PlayerHandler {
     private boolean notificationNearMonster = false;
     private boolean notificationMovementControls = false;
     
+    
+    private double lastHungerDelta = 0;
+    public static final double HUNGER_PERIOD = 0.5;
+    private double lastHungerDamgeDelta = 0;
+    public static final double HUNGER_DAMAGE_PERIOD = 1.5;
+    
     public static final double ACCELERATION = 20;
     public static final double MAX_VELOCITY = 100;
     
@@ -150,6 +156,25 @@ public class PlayerHandler {
             controller.getDeathPane().setVisible(true);
             controller.getDeathDaysLabel().setText("Days Survived: " + HundredDays.getGame().getGameDay());
             HundredDays.getGame().close();
+        }
+        
+        
+        //update player hunger
+        if(this.velX != 0 || this.velY != 0){
+            lastHungerDelta += deltaT;
+            if(this.lastHungerDelta >= HUNGER_PERIOD){
+                this.lastHungerDelta = 0;
+                player.setHunger(Math.max(0, player.getHunger() - 1));
+            }
+        }
+        
+        //hunger damage
+        if(player.getHunger() <= 0){
+            lastHungerDamgeDelta += deltaT;
+            if(this.lastHungerDamgeDelta >= HUNGER_DAMAGE_PERIOD){
+                this.lastHungerDelta = 0;
+                this.player.onAttack(2);
+            }
         }
         
         updateNotifications();
