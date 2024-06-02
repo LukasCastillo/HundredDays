@@ -31,7 +31,7 @@ public class Zombie extends Monster{
 
     public Zombie(double x, double y) {
         super(x, y, new ImageView(new Image(HundredDays.class.getResource("monsters/zombie.png").toString())), 30, 80, 
-                new Item[] {new Item("Rotten Meat", 2), new Item("Bones")}, 20, 30);
+                new Item[] {new Item("Wood")}, 20, 30);
         hitbox = new Hitbox(0, 0, 10, 20);
         random = new Random();
     }
@@ -112,7 +112,12 @@ public class Zombie extends Monster{
         this.hp -= damage * (1 - this.baseDefence / 1000);
 //        Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue()));
         System.out.println("Help!!: " + this.hp);
-        if(this.hp <= 0) HundredDays.getGame().deleteGameObject(this);
+        if(this.hp <= 0) {
+            HundredDays.getGame().deleteGameObject(this);
+            for(Item item : this.getDrops()){
+                HundredDays.getGame().getPlayerHandler().getPlayer().pickUpItem(item);
+            }
+        }
     }
 
     @Override

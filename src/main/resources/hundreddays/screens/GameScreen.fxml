@@ -36,46 +36,76 @@
                         <Insets bottom="10.0" left="10.0" top="10.0" />
                      </BorderPane.margin>
                      <children>
-                        <Pane HBox.hgrow="NEVER">
+                        <StackPane HBox.hgrow="NEVER">
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../ui/inventoryTile.png" />
                                  </image></ImageView>
+                              <ImageView fx:id="itemImage1" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="itemCount1" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="38.0" text="0" StackPane.alignment="BOTTOM_RIGHT">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" right="10.0" top="10.0" />
+                                 </StackPane.margin>
+                              </Label>
                            </children>
-                        </Pane>
-                        <Pane>
+                        </StackPane>
+                        <StackPane>
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../ui/inventoryTile.png" />
                                  </image></ImageView>
+                              <ImageView fx:id="itemImage2" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="itemCount2" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="38.0" text="0" StackPane.alignment="BOTTOM_LEFT">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" right="10.0" />
+                                 </StackPane.margin>
+                              </Label>
                            </children>
-                        </Pane>
-                        <Pane>
+                        </StackPane>
+                        <StackPane>
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../ui/inventoryTile.png" />
                                  </image></ImageView>
+                              <ImageView fx:id="itemImage3" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="itemCount3" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="38.0" text="0" StackPane.alignment="BOTTOM_LEFT">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" right="10.0" />
+                                 </StackPane.margin>
+                              </Label>
                            </children>
-                        </Pane>
-                        <Pane>
+                        </StackPane>
+                        <StackPane>
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../ui/inventoryTile.png" />
                                  </image></ImageView>
+                              <ImageView fx:id="itemImage4" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="itemCount4" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="38.0" text="0" StackPane.alignment="BOTTOM_RIGHT">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" right="10.0" />
+                                 </StackPane.margin>
+                              </Label>
                            </children>
-                        </Pane>
-                        <Pane>
+                        </StackPane>
+                        <StackPane>
                            <children>
                               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                                  <image>
                                     <Image url="@../ui/inventoryTile.png" />
                                  </image></ImageView>
+                              <ImageView fx:id="itemImage5" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="itemCount5" alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="38.0" text="0" StackPane.alignment="BOTTOM_RIGHT">
+                                 <StackPane.margin>
+                                    <Insets bottom="5.0" right="10.0" />
+                                 </StackPane.margin>
+                              </Label>
                            </children>
-                        </Pane>
+                        </StackPane>
                      </children>
                   </HBox>
                </left>

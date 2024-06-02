@@ -12,6 +12,7 @@ import hundreddays.model.GameObjects.Entites.Monsters.Monster;
 import hundreddays.model.GameObjects.GameObject;
 import hundreddays.model.Hitbox;
 import hundreddays.model.Interfaces.Collidable;
+import hundreddays.model.Items.Item;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.geometry.Rectangle2D;
@@ -205,6 +206,18 @@ public class PlayerHandler {
         
         controller.getHealthBar().setProgress(player.getHp() / player.getMaxHp());
         controller.getHungerBar().setProgress(player.getHunger() / player.getMaxHunger());
+        
+        //render items
+        for(int itemIndex = 0; itemIndex < this.player.getItems().size(); itemIndex++){
+            Item item = this.player.getItems().get(itemIndex);
+            controller.getItemCounts().get(itemIndex).setText(""+item.getCount());
+            try{
+                Image image = new Image(HundredDays.class.getResource("items/"+item.getName()+".png").toString());
+                controller.getItemImages().get(itemIndex).setImage(image);
+            }catch(Exception e){
+                controller.getItemImages().get(itemIndex).setImage(new Image(HundredDays.class.getResource("items/error.png").toString()));
+            }
+        }
     }
     
     

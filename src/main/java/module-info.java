@@ -10,4 +10,5 @@ module hundreddays {
 
     
     exports hundreddays;
+    exports hundreddays.model;
 }

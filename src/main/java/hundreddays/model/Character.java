@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author sethl
+ * @author Seth Lukas C. Castillo
  */
 public class Character {
     private String name;
@@ -70,16 +70,18 @@ public class Character {
         
     }
     
-    public void pickUpItem(Item item){
+    public boolean pickUpItem(Item item){
         for(Item i : items){
             if(i.getName().equals(item.getName())){
                 i.addCount(item.getCount());
-                return;
+                return true;
             }
         }
         
-        if(this.items.size() >= 20) return; //throw the InventoryFullException
+        if(this.items.size() >= 5) return false;
         this.items.add(item);
+        
+        return true;
     }
 
     /**

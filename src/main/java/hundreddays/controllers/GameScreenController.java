@@ -8,6 +8,7 @@ import hundreddays.HundredDays;
 import hundreddays.enums.KeyAction;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -61,6 +62,20 @@ public class GameScreenController implements Initializable {
     @FXML private Label notificationHeader;
     @FXML private Label notificaitonContent;
     @FXML private Button notificationButton;
+    
+    @FXML private ImageView itemImage1;
+    @FXML private ImageView itemImage2;
+    @FXML private ImageView itemImage3;
+    @FXML private ImageView itemImage4;
+    @FXML private ImageView itemImage5;
+    private ArrayList<ImageView> itemImages;
+    
+    @FXML private Label itemCount1;
+    @FXML private Label itemCount2;
+    @FXML private Label itemCount3;
+    @FXML private Label itemCount4;
+    @FXML private Label itemCount5;
+    private ArrayList<Label> itemCounts;
 
     @FXML private void pauseAction(){
         System.out.println("Paused Game");
@@ -143,6 +158,21 @@ public class GameScreenController implements Initializable {
         
         HUDPane.setVisible(true);
         HUDPane.setDisable(false);
+        
+        //Item Views
+        itemImages = new ArrayList();
+        itemImages.add(itemImage1);
+        itemImages.add(itemImage2);
+        itemImages.add(itemImage3);
+        itemImages.add(itemImage4);
+        itemImages.add(itemImage5);
+        
+        itemCounts = new ArrayList();
+        itemCounts.add(itemCount1);
+        itemCounts.add(itemCount2);
+        itemCounts.add(itemCount3);
+        itemCounts.add(itemCount4);
+        itemCounts.add(itemCount5);
         
         //on window key down
         HundredDays.getStage().addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent key) -> {
@@ -264,5 +294,19 @@ public class GameScreenController implements Initializable {
      */
     public Label getNotificaitonContent() {
         return notificaitonContent;
+    }
+
+    /**
+     * @return the itemImages
+     */
+    public ArrayList<ImageView> getItemImages() {
+        return itemImages;
+    }
+
+    /**
+     * @return the itemCounts
+     */
+    public ArrayList<Label> getItemCounts() {
+        return itemCounts;
     }
 }

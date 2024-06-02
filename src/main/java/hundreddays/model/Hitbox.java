@@ -7,14 +7,22 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- *
- * @author sethl
+ * A hitbox represents a 2d area where the player cant pass though composed of a x and y center position and the width and height of the hitbox.
+ * Note that hitboxes uses center position instead of corner position.
+ * @author Seth Lukas C. Castillo
  */
 public class Hitbox {
     private double centerX, centerY;
     private double width, height;
     private Rectangle rect;
     
+    /**
+    Creates a new Hitbox with a specified centerX, centerX, width and height. 
+     * @param centerX x center position of hitbox
+     * @param height height of the hitbox
+     * @param centerY y center position of hitbox
+     * @param width width of the hitbox
+    */
     public Hitbox(double centerX, double centerY, double width, double height){
         this.centerX = centerX;
         this.centerY = centerY;
@@ -25,10 +33,21 @@ public class Hitbox {
         this.rect.setFill(new Color(1, 0, 0, 0.3));
     }
     
+    /**
+    Creates a new instance of a hitbox with the same parameters (position, dimensions) of this hitbox.
+     * @return The new instantiated hitbox
+    */
     public Hitbox copy(){
         return new Hitbox(centerX, centerY, width, height);
     }
     
+    /**
+        Checks if this hitbox intersects with a specified hitbox.
+
+        @param h2 The hitbox to check for intersection
+
+        @return Whether the specified and this hitbox intersect.
+    */
     public boolean intersects(Hitbox h2){
         if((this.width == 0 && this.height == 0) || (h2.width == 0 && h2.height == 0)) return false;
         double p1X = centerX - width / 2;
@@ -40,11 +59,22 @@ public class Hitbox {
         return (p1X + this.width > p2X && p1X < p2X + h2.width && p1Y + this.height > p2Y && p1Y < p2Y + h2.height);
     }
     
+    /**
+        Changes the position of the hitbox by the specified x and y offsets.
+        
+        @param dX amount to move hitbox in the x direction
+        @param dY amount to move hitbox in the y direction
+    */
     public void moveBy(double dX, double dY){
         this.centerX += dX;
         this.centerY += dY;
     }
     
+    /**
+        Moves this hitbox out from the specified hitbox with the shortest path. This method is used to push out this hitbox when it intersects with the given hitbox.
+    
+        @param border The hitbox that is treated as immovable.
+    */
     public void pushOut(Hitbox border){
         assert this.intersects(border);
         
@@ -61,12 +91,20 @@ public class Hitbox {
         else if(minPush == left) this.setCenterX(border.centerX - border.width / 2 - this.width / 2);
     }
     
+    /**
+        Sets the position of the hitbox to the specified x and y center positions.
+    
+        @param centerX New x center position of hitbox.
+        @param centerY New y center position of hitbox.
+    */
     public void setPosition(double centerX, double centerY){
         this.centerX = centerX;
         this.centerY = centerY;
     }
 
     /**
+     * Gets the center x position of the Hitbox.
+     * 
      * @return the centerX
      */
     public double getCenterX() {
@@ -74,6 +112,8 @@ public class Hitbox {
     }
 
     /**
+     * Sets the center x position of the Hitbox.
+     * 
      * @param centerX the centerX to set
      */
     public void setCenterX(double centerX) {
@@ -81,6 +121,8 @@ public class Hitbox {
     }
 
     /**
+     * Gets the center y position of the Hitbox.
+     * 
      * @return the centerY
      */
     public double getCenterY() {
@@ -88,6 +130,8 @@ public class Hitbox {
     }
 
     /**
+     * Sets the center y position of the Hitbox.
+     * 
      * @param centerY the centerY to set
      */
     public void setCenterY(double centerY) {
@@ -95,6 +139,8 @@ public class Hitbox {
     }
 
     /**
+     * Gets the width of the Hitbox.
+     * 
      * @return the width
      */
     public double getWidth() {
@@ -102,6 +148,8 @@ public class Hitbox {
     }
 
     /**
+     * Sets the width of the Hitbox.
+     * 
      * @param width the width to set
      */
     public void setWidth(double width) {
@@ -109,6 +157,8 @@ public class Hitbox {
     }
 
     /**
+     * Sets the height of the Hitbox
+     * 
      * @return the height
      */
     public double getHeight() {
@@ -116,6 +166,8 @@ public class Hitbox {
     }
 
     /**
+     * Returns the height of the Hitbox
+     * 
      * @param height the height to set
      */
     public void setHeight(double height) {
@@ -123,7 +175,9 @@ public class Hitbox {
     }
 
     /**
-     * @return the rect
+     * Returns the Drawable rectangle with the same dimensions and postion as the hitbox.
+     * 
+     * @return The Rectangle Node
      */
     public Rectangle getRect() {
         return rect;
